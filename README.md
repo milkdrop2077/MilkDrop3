@@ -74,8 +74,8 @@ CTRL+up will send a fastforward 5sec command to winamp only<br/>
 CTRL+down will send a fastrewind 5sec command to winamp only<br/>
 
 -Pressing the key 'f' will filter the presets : showing (and loading) only normal .milk presets, only double .milk2 presets or ALL of them.<br/>
-Keep in mind that if you want to mashup presets (with a/z/m) or create double-presets, you should be showing only classic presets (.milk),<br/>
-for that press 'f' twice.<br/>
+Keep in mind that if you want to mashup presets (with a/z/m) or create some new double-presets,<br/>
+you should be showing only classic presets (.milk), for that press 'f' twice.<br/>
 
 -double-preset (.milk2) https://www.youtube.com/watch?v=n37SbxfLK0k<br/>
 Press F9 to enter double-preset mode. Now if you press the spacebar, you'll create a mix of 2 presets.<br/>
@@ -106,6 +106,7 @@ History:<br/>
 -09/04/2023 : Version 3.12 :<br/> 
 10x faster way to load the presets list, can load 50.000 presets under 1 second!<br/>
 better way to diplay preset's names (for milk and milk2 files)<br/>
+new plasma3 transition effect (a bit crazier than plasma and plasma2)<br/>  
 I removed the V2M player in the installer to avoid any false-positive<br/><br/>
 -19/03/2023 : Version 3.1 : stable<br/><br/>
 -03/03/2023 : Version 3.0 : alpha, pretty unstable
