@@ -105,8 +105,9 @@ History:<br/>
 
 -09/04/2023 : Version 3.12 :<br/> 
 10x faster way to load the presets list, can load 50.000 presets under 1 second!<br/>
-better way to diplay preset's names (F4) for milk and milk2 files<br/>
+better way to display preset's names (F4) for milk and milk2 files<br/>
 new plasma3 transition effect (a bit crazier than plasma and plasma2)  
+corrected a few bugs while loading preset with textures
 I removed the V2M player in the installer to avoid any false-positive<br/><br/>
 -19/03/2023 : Version 3.1 : stable<br/><br/>
 -03/03/2023 : Version 3.0 : alpha, pretty unstable
