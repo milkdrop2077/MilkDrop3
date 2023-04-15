@@ -1,11 +1,15 @@
 # MilkDrop3
 
+How to download and install : https://youtu.be/OQdZFlOHe5o<br/>
+All the new features explained : https://youtu.be/QBsDXPENe1I<br/>
+
 MilkDrop 3.0 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud...)<br/>
 it's an evolution of my version of BeatDrop2077, based on BeatDrop.<br/>
 It supports a new type of double-preset (.milk2 file) mixing 2 presets and displaying them both simultaneously.<br/>
 Here are a few double-preset: https://www.youtube.com/watch?v=97XrIatMBWc<br/>
 You can create new presets by pressing just a few keys without knowing any lines of code<br/>
-(F9 and then press the spacebar to create a new double-preset, that's it) and create new colors by pressing just the key 'c'.<br/>
+(F9 and then press the spacebar to create a new double-preset, that's it).<br/>
+Create new colors by pressing just the key 'c' https://twitter.com/MilkDrop2077/status/1614526230929498113<br/>
 Also I created a new mode for auto-changing the presets based on beat detection.<br/>
 Here is a fast version of that: https://www.youtube.com/watch?v=pSzdThg1iW8<br/>
 ![Screenshot](MilkDrop3.jpg)<br/>
