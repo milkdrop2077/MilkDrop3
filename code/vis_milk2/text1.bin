@@ -1,0 +1,28 @@
+ BEATDROP2077:
+
+   ESC             exit help / menus
+   ALT+ENTER       toggle fullscreen (or double-click on mouse!)
+   ALT+SHIFT       toggle multiple monitor stretching
+
+ PRESETS:
+
+   SPACE / H       soft / hard cut to next preset
+   BACKSPACE       go back to previous preset
+   ` / ~           [un]lock current preset
+   R               toggle random/sequential preset order 
+   L               load specific preset
+   M               show/hide preset-editing Menu
+   S               save new preset
+   A               do random mini-mash-up
+   D               toggle warp & comp shader locks
+
+ HOTKEYS:
+
+   F1    help
+   F2    change max FPS
+   F3    change time between preset
+   F4    Show preset name
+   F5    Show FPS
+   F6    Show preset rating
+   F7    Always on top
+   F10   Pause

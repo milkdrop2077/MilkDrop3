@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="library">
+      <UniqueIdentifier>{3377a26f-db8f-4eb6-8291-c31a4e1685cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library\headers">
+      <UniqueIdentifier>{683304f8-0e6b-4bf2-8ca5-a3be4ef14e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library\sources">
+      <UniqueIdentifier>{c3cd6f6e-846a-45aa-be08-fe24caec5f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="library\resources">
+      <UniqueIdentifier>{d2f87be5-5f0e-4c55-b98f-23f5810cce55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="musikcube">
+      <UniqueIdentifier>{a80939e4-d079-498f-bb43-482a4708d7d5}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="library\ns-eel">
+      <UniqueIdentifier>{ad60581f-f132-4b9d-86c6-2c543b5c59da}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ns-eel2\nseel-caltab.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ns-eel2\nseel-cfunc.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ns-eel2\nseel-compiler.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ns-eel2\nseel-eval.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ns-eel2\nseel-lextab.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ns-eel2\nseel-ram.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ns-eel2\nseel-yylex.c">
+      <Filter>library\ns-eel</Filter>
+    </ClCompile>
+    <ClCompile Include="Milkdrop2PcmVisualizer.cpp">
+      <Filter>musikcube</Filter>
+    </ClCompile>
+    <ClCompile Include="textmgr.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="texmgr.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="support.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="milkdropfs.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pluginshell.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="wasabi.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="dxcontext.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="fft.cpp">
+      <Filter>library\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\guid.cpp">
+      <Filter>musikcube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\log.cpp">
+      <Filter>musikcube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\loopback-capture.cpp">
+      <Filter>musikcube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\prefs.cpp">
+      <Filter>musikcube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\audiobuf.cpp">
+      <Filter>musikcube</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="plugin_icon.ico">
+      <Filter>library\resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="wasabi.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="shell_defines.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pluginshell.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="fft.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="dxcontext.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="defines.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="md_defines.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="plugin.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="support.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="texmgr.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="textmgr.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoCharFn.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoWide.h">
+      <Filter>library\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\cleanup.h" />
+    <ClInclude Include="..\audio\common.h" />
+    <ClInclude Include="..\audio\log.h" />
+    <ClInclude Include="..\audio\loopback-capture.h" />
+    <ClInclude Include="..\audio\prefs.h" />
+    <ClInclude Include="..\audio\audiobuf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="text1.bin">
+      <Filter>library\resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="plugin.rc">
+      <Filter>library\resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
