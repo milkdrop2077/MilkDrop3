@@ -8723,27 +8723,48 @@ void CPlugin::DoCustomSoundAnalysis()
     memcpy(mysound.fWave[1], m_sound.fWaveform[1], sizeof(float)*576);
 
     // do our own [UN-NORMALIZED] fft
-	float fWaveLeft[576];
+	float fWaveLeft[576]; //left channel
+	float fWaveRight[576] //right channel
 	for (int i=0; i<576; i++)
-        fWaveLeft[i] = m_sound.fWaveform[0][i];
+	{
+        	fWaveLeft[i] = m_sound.fWaveform[0][i];
+		fWaveRight[i] = m_sound.fWaveform[1][i];
+	}
 
 	memset(mysound.fSpecLeft, 0, sizeof(float)*MY_FFT_SAMPLES);
+	memset(mysound.fSpecRight, 0, sizeof(float)*MY_FFT_SAMPLES);
 
 	myfft.time_to_frequency_domain(fWaveLeft, mysound.fSpecLeft);
+	myfft.time_to_frequency_domain(fWaveRight, mysound.fSpecRight);
 	//for (i=0; i<MY_FFT_SAMPLES; i++) fSpecLeft[i] = sqrtf(fSpecLeft[i]*fSpecLeft[i] + fSpecTemp[i]*fSpecTemp[i]);
 
 	// sum spectrum up into 3 bands
+	//Incubo_'s fixed beat detection (pretty perfect, accurate)
 	for (i=0; i<3; i++)
 	{
-		// note: only look at bottom half of spectrum!  (hence divide by 6 instead of 3)
-		int start = MY_FFT_SAMPLES*i/6;
-		int end   = MY_FFT_SAMPLES*(i+1)/6;
+	int start = MY_FFT_SAMPLES*i/192;
+        int end = MY_FFT_SAMPLES*(i+1)/192;
 		int j;
+		//bass
+
+        if (i == 1)
+        {
+            start = MY_FFT_SAMPLES * i / 64;
+            end = MY_FFT_SAMPLES * (i + 1) / 64;
+		//mid
+        }
+
+        if (i == 2)
+        {
+            start = MY_FFT_SAMPLES*i/6;
+            end = MY_FFT_SAMPLES*(i + 1)/6;
+		//treb as normal beat detection code
+        }
 
 		mysound.imm[i] = 0;
 
 		for (j=start; j<end; j++)
-			mysound.imm[i] += mysound.fSpecLeft[j];
+			mysound.imm[i] += (mysound.fSpecLeft[j] + mysound.fSpecRight[j])/2; //I made the beat detection reacting on both channels, like projectM. Why don't you try?
 	}
 
 	// do temporal blending to create attenuated and super-attenuated versions
