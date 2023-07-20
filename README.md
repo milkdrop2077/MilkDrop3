@@ -2,17 +2,18 @@
 
 How to download and install : https://youtu.be/OQdZFlOHe5o<br/>
 All the new features explained : https://youtu.be/QBsDXPENe1I<br/>
+How to create a beautiful double-preset : https://youtu.be/AdcUPpp1O0k<br/>
 
-MilkDrop 3.0 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud...)<br/>
+MilkDrop 3.0 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud, Winamp...)<br/>
 it's an evolution of my version of BeatDrop2077, based on BeatDrop.<br/>
 It supports a new type of double-preset (.milk2 file) mixing 2 presets and displaying them both simultaneously.<br/>
-Here are a few double-preset: https://www.youtube.com/watch?v=97XrIatMBWc<br/>
-You can create new presets by pressing just a few keys without knowing any lines of code<br/>
+Here are a few double-preset: https://www.youtube.com/watch?v=6UXKyz4nOfI<br/>
+You can create new presets by pressing just a few keys, without knowing any lines of code<br/>
 (F9 and then press the spacebar to create a new double-preset, that's it).<br/>
 Create new colors by pressing just the key 'c' https://twitter.com/MilkDrop2077/status/1614526230929498113<br/>
 Also I created a new mode for auto-changing the presets based on beat detection.<br/>
 Here is a fast version of that: https://www.youtube.com/watch?v=pSzdThg1iW8<br/>
-![Screenshot](MilkDrop3.jpg)<br/>
+<img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop3.jpg" width="600" />
 
 -Lots of new key shortcuts, see the whole list above.<br/>
 For some letters, the majuscule and minuscule matters.<br/>
@@ -78,21 +79,18 @@ CTRL+up will send a fastforward 5sec command to winamp only<br/>
 CTRL+down will send a fastrewind 5sec command to winamp only<br/>
 
 -Pressing the key 'f' will filter the presets : showing (and loading) only normal .milk presets, only double .milk2 presets or ALL of them.<br/>
-Keep in mind that if you want to mashup presets (with a/z/m) or create some new double-presets,<br/>
-you should be showing only classic presets (.milk), for that press 'f' twice.<br/>
+When pressing the keys A,D,M,Z or F9, it will auto-switch to 'Show only classic-presets' to avoid any mash-up errors.<br/>
 
 -double-preset (.milk2) https://www.youtube.com/watch?v=n37SbxfLK0k<br/>
 Press F9 to enter double-preset mode. Now if you press the spacebar, you'll create a mix of 2 presets.<br/>
 You can save them with the key 's' like a normal preset, it will create a new milk2 file.<br/>
-You can try a few blending effect by pressing spacebar and then backspace a few times,<br/>
-or you can force certain type of blending pattern pressing the key 'p' ("zoom", "side", "plasma" ect...)<br/>
-if you press the key 'P' you can force the blending progress (10%, 20%, 30% ect...)<br/>
+Try the different types of blending pattern by pressing the key 'p' ("zoom", "side", "plasma" ect...)<br/>
+if you press the key 'P' (shift+p) you can force the blending progress (10%, 20%, 30% ect...)<br/>
 Some blending pattern like plasma have a lots of random values,<br/>
-so you'll have different results pressing the spacebar and backspace multiple times.<br/>
+you can reload those values to see a different plasma effect by pressing the key 'o'.<br/>
 All of these random values are saved in the .milk2 file.<br/>
-Again, if you want to create double-presets, I suggest loading only normal milk presets by pressing the 'f' key twice (show only classic-presets)<br/>
-Please take note that resizing the window or entering/exiting fullscreen mode will "break" your double-preset,<br/>
-MilkDrop will fully load the second preset of the double-preset displaying.<br/> 
+You can now flip the preset1 and preset2 by pressing the key 'u'.<br/>
+Force the blending direction (from the inside or outside) by pressing the key 'U' (shift+u).<br/>
 
 Also:<br/>
 -WAVE_SIZE can now have 0-100 value<br/>
@@ -103,9 +101,30 @@ Also:<br/>
 -WARP_SPEED can now have 0-100 value<br/>
 
 I've setup up a patreon page, I've spend countless hours on MilkDrop3, if you would like to support this project and future updates:<br/>
-https://www.patreon.com/MilkDrop3<br/><br/>
+https://www.patreon.com/MilkDrop3<br/>
+https://www.buymeacoffee.com/MilkDrop2077/<br/>
+
+<img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop32.jpg" width="600" />
 
 History:<br/>
+
+-20/07/2023 : Version 3.2<br/>
+-Double-preset are now displayed correctly when entering/exiting full screen or resizing the window.<br/>
+-Live blending update: pressing the keys 'p' and 'P' will display directly pattern or progress, no more backspace/spacebar needed!<br/>
+-Reload a double-preset: pressing 'o' will reload a double-preset only with different random values,<br/> 
+ very handy to see different plasma blend for example<br/>
+-Flip presets: press 'u' to flip preset 1 and 2 (and keep the exact position)<br/>
+-Locked direction: press 'U' to force the direction of the blending,<br/> 
+ ex: if you are using the cercle pattern, -1 = from the INSIDE, 1 = from the OUTSIDE<br/>
+-Block a preset: press 'b' to lock a preset, it will always load first when creating a double-preset (F9 and then SPACEBAR)<br/>
+-Press 'B' to choose the blending time<br/>
+-When pressing F4, you can now see both preset names if it's a double-preset<br/>
+-New borderless mode with F7<br/>
+-New delete mode: press CTRL+DELETE to start delete mode.<br/>
+ Now you can delete any preset you see simply by pressing the DELETE key (no need to load the list and confirmation)<br/>
+ Very handy if you want to clean a large number of presets, be careful you can't restore a deleted preset!<br/>
+-When pressing the keys A,D,M,Z or F9, it will auto-switch to 'Show only classic-presets' to avoid any mash-up errors.<br/>
+-added the Beginners Guide to MilkDrop Preset Writing in html and doc in the Milkdrop3\docs folder<br/><br/>
 
 -09/04/2023 : Version 3.12 :<br/> 
 10x faster way to load the presets list, can load 50.000 presets under 1 second!<br/>
