@@ -64,7 +64,7 @@ hardcut6 : load a new preset if bass >1.5 + will load Bass/WHITE.milk if bass > 
 
 - Lots of new transition effects (when pressing the spacebar), the first old 4 were : "zoom", "side", "plasma", "cercle".<br/>
 New ones: "plasma2", "plasma3", "snail", "snail2", "snail3", "triangle", "donuts", "corner", "patches", "checkerboard", "bubbles", "stars", "cisor", "wave",  "curtain", "vertical", "horizontal", "linesvertical", "lineshorizontal".<br/>
-And since version 3.21, an extra 7 transitions: "square", "stars2", "clock", "nuclear", "arrow", "cross", "cross2".
+And since version 3.21, an extra 7 transitions: "square", "stars2", "clock", "nuclear", "arrow", "cross", "cross2".<br/>
 A few example here: https://www.youtube.com/watch?v=WXK-pzCPfYk<br/>
 
 - Improved search function:<br/>
