@@ -109,9 +109,9 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 <img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop32.jpg" width="600" />
 
-History:<br/>
+# History:
 
-★ 03/10/2023 : Version 3.21<br/>
+★ <ins>03/10/2023 : Version 3.21</ins><br/>
 - 100 new presets (for total of +900!) + some new textures.<br/>
 - Options saved in the .ini file were completely rewritten.<br/>
 - You can now save any options available, save the exact window position, start MilkDrop in fullscreen...<br/>
@@ -131,7 +131,7 @@ History:<br/>
 - New menus and new GUI (MilkDropPanel), both are a bit empty at moment, but they will grow over time with lots of new functionalities coming!<br/>
 - Know bugs that need to be fixed : don't have a preset named 0.milk, it crashes MilkDrop3 when mashing presets.<br/><br/>
 
-★ 20/07/2023 : Version 3.2<br/>
+★ <ins>20/07/2023 : Version 3.2</ins><br/>
 - Double-preset are now displayed correctly when entering/exiting full screen or resizing the window.<br/>
 - Live blending update: pressing the keys 'p' and 'P' will display directly pattern or progress, no more backspace/spacebar needed!<br/>
 - Reload a double-preset: pressing 'o' will reload a double-preset only with different random values,<br/> 
@@ -149,13 +149,13 @@ History:<br/>
 - When pressing the keys A,D,M,Z or F9, it will auto-switch to 'Show only classic-presets' to avoid any mash-up errors.<br/>
 - Added the Beginners Guide to MilkDrop Preset Writing in html and doc in the Milkdrop3\docs folder.<br/><br/>
 
-★ 09/04/2023 : Version 3.12 :<br/> 
+★ <ins>09/04/2023 : Version 3.12 :</ins><br/> 
 - 10x faster way to load the presets list, can load 50.000 presets under 1 second!<br/>
 - Better way to display preset names (F4) for milk and milk2 files.<br/>
 - New plasma3 transition effect (a bit crazier than plasma and plasma2).  
 - Corrected a few bugs while loading preset with textures.<br/>
 - I removed the V2M player in the installer to avoid any false-positive.<br/><br/>
 
-★ 19/03/2023 : Version 3.1 : stable.<br/><br/>
+★ <ins>19/03/2023 : Version 3.1 : stable.</ins><br/><br/>
 
-★ 03/03/2023 : Version 3.0 : alpha, pretty unstable.
+★ <ins>03/03/2023 : Version 3.0 : alpha, pretty unstable.</ins>
