@@ -111,24 +111,38 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
+★ <ins>11/10/2023 : Version 3.22</ins><br/>
+- Better compatibility with Windows 11.<br/>
+- Better compatibility for low and ultra high resolution screen.<br/>
+The font size will be adjusted if the resolution is lower than 1000 or higher than 2000 vertical pixels.<br/>
+- Font size is now adjustable in the MilkDropPanel.
+- An external program like Winamp, Spotify, foobar2000, a videogame... or anything you want<br/>
+  can be launched when MilkDrop3 is starting or when pressing the key 't' or 'T'.<br/><br/>
+
 ★ <ins>03/10/2023 : Version 3.21</ins><br/>
 - 100 new presets (for total of +900!) + some new textures.<br/>
 - Options saved in the .ini file were completely rewritten.<br/>
 - You can now save any options available, save the exact window position, start MilkDrop in fullscreen...<br/>
 - New transition effects: square, stars2, clock, nuclear, arrow, cross, cross2.<br/>
+The last 2 are some kind of hybrid transition, some parts of the screen are not blending at all :)<br/>
 - New algorithm for saving presets: size is much smaller, load time will be a bit faster.<br/>
   Only the wavecode and shapecode enabled will be saved.<br/>
 - Values were optimized for each pattern when displaying a double-preset.<br/>
+That means the blend percentage when you're pressing the spacebar will be adjusted for each pattern<br/>
+so it won't be over or under-blend. For example "triangle" will be set between 0.2 and 0.6,<br/>
+but "cross2" between 0.7 to 0.95, because "cross2" will only start to appear after 0.7!
 - When pressing 'P' to change the progress, it will increment the actual progress number and not start from 0.<br/>
+For example if you're at the blending progress 0.42, it will jump to 0.45 > 0.50 > 0.55...<br/>
 - Locked blending patterns / progress / directions are now displayed in red colour on the information screen (n).<br/>
 - New  algorithm for changing colors to avoid multiple ret /= float3 in the composite shader.<br/>
-- Pressing 'c' will search for //MilkDrop3 Color Mode: and replace the line underneath with the ret /= float.<br/>
+Pressing 'c' will search for //MilkDrop3 Color Mode: and replace the line underneath with the ret /= float.<br/>
 - New borderless mode, press F7 multiple times to toggle modes.<br/>
-"NoBorder + Resize ON" : you can resize the window to any size you want (but can't use the double-click to enter fullscreen).<br/>
-"NoBorder + Resize OFF" you can't resize but you can use the  double-click to enter fullscreen.<br/>
+"NoBorder + Resize ON" : can resize the window to any size (but can't use the double-click to enter fullscreen).<br/>
+"NoBorder + Resize OFF" can't resize, but can use the  double-click to enter fullscreen.<br/>
 - Better behaviour when using deepmash : dm menus will disappear when pressing 's' or 'shift+z'.<br/>
 - Corrected a few bugs : while saving a preset after using a blocked preset, while renaming some presets, exiting fullscreen, exiting AlwaysOnTop, I fixed some old legacy bugs from loading textures...<br/>
 - New menus and new GUI (MilkDropPanel), both are a bit empty at moment, but they will grow over time with lots of new functionalities coming!<br/>
+MilkDropPanel is called for the Options/Donate/About box.
 - Know bugs that need to be fixed : don't have a preset named 0.milk, it crashes MilkDrop3 when mashing presets.<br/><br/>
 
 ★ <ins>20/07/2023 : Version 3.2</ins><br/>
