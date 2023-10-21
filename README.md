@@ -111,6 +111,9 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
+★ <ins>21/10/2023 : Version 3.23</ins><br/>
+- fixed some issues with display DPI scaling.<br/><br/>
+
 ★ <ins>11/10/2023 : Version 3.22</ins><br/>
 - Better compatibility with Windows 11.<br/>
 - Better compatibility for low and ultra high resolution screen.<br/>
