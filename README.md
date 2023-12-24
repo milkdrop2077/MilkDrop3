@@ -4,6 +4,9 @@
 - All the new features explained : https://youtu.be/QBsDXPENe1I<br/>
 - How to create a beautiful double-preset : https://youtu.be/AdcUPpp1O0k<br/>
 
+<img align="left" width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop324a.jpg">
+<img  width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop324b.jpg">
+
 MilkDrop 3.0 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud, Winamp...)<br/>
 It is based on BeatDrop from Maxim Volskiy, so it's 100% compatible with any presets created with MilkDrop and projectM.<br/>
 MilkDrop3 does everything that MilkDrop2 can do, I will be only listing on this page the additional new features :)<br/><br/>
@@ -13,7 +16,7 @@ You can create new presets by pressing just a few keys, without knowing any line
 (F9 and then press the spacebar to create a new double-preset, that's it).<br/>
 Create new colors by pressing just the key 'c' https://twitter.com/MilkDrop2077/status/1614526230929498113<br/>
 Also I created a new mode for auto-changing the presets based on beat detection.<br/>
-Here is a fast version of that: https://www.youtube.com/watch?v=pSzdThg1iW8<br/>
+Here is a fast version of that: https://www.youtube.com/watch?v=pSzdThg1iW8<br/><br/>
 <img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop3.jpg" width="600" />
 
 - Lots of new key shortcuts, see the whole list above.<br/>
@@ -110,6 +113,16 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 <img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop32.jpg" width="600" />
 
 # History:
+
+★ <ins>24/12/2023 : Version 3.24</ins><br/>
+- You can now inject effects directly in the shaders (toggle with F11 or use the menu).<br/>
+- Easy sprites controls: choose the blending mode, opacity, size, position, movement, speed... directly from the menu!<br/>
+- Sprites are now staying if you resize the window!<br/>
+- Drag and Drop added, files supported : milk, milk2, wave, shape, png, jpg, jfif, bmp.<br/>
+- Delete mode is finally working perfectly.<br/>
+- In case of a shader compilation error, MilkDrop3 will automatically update the shader (2>3>4) and try again.<br/>
+  You can disable this options in the MilkDropPanel.<br/>
+- I reduced the number of presets to 500, the cream of the cream, what a collection :)<br/><br/>
 
 ★ <ins>21/10/2023 : Version 3.23</ins><br/>
 - fixed some issues with display DPI scaling.<br/><br/>
