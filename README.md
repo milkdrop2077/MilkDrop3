@@ -123,8 +123,8 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 - In case of a shader compilation error, MilkDrop3 will automatically update the shader (2>3>4) and try again.<br/>
 This should remove the max instructions slots limit error! This mean you'll only see the same error not matter what went wrong.<br/>
 If you want to debug a preset, you should disable this option in the MilkDropPanel.<br/>
-- By default MilkDrop3 start in 'Sprites' mode, that mean you can direclty call sprites (pressing 00, 01, 02...) from the milk3_img.ini<br/>
-If you want to switch to 'Messages' mode, press Shift+k. Check the milk3_img.ini and milk3_msg.ini for more informations.<br/>
+- By default MilkDrop3 start in 'Sprites' mode, that mean you can directly call sprites (pressing 00, 01, 02...) from the milk3_img.ini<br/>
+If you want to switch to 'Messages' mode, press Shift+k. Check the milk3_img.ini and milk3_msg.ini for more information.<br/>
 Press F1 to see the new keys used for Sprites and Messages.<br/>
 I reduced the number of presets to 500, the cream of the cream, what a collection :)<br/><br/>
 
