@@ -117,12 +117,16 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 ★ <ins>24/12/2023 : Version 3.24</ins><br/>
 - You can now inject effects directly in the shaders (toggle with F11 or use the menu).<br/>
 - Easy sprites controls: choose the blending mode, opacity, size, position, movement, speed... directly from the menu!<br/>
-- Sprites are now staying if you resize the window!<br/>
+- Sprites are now staying if you resize the window! This was quite a challenge to code.<br/>
 - Drag and Drop added, files supported : milk, milk2, wave, shape, png, jpg, jfif, bmp.<br/>
-- Delete mode is finally working perfectly.<br/>
+- Delete mode is finally working perfectly. Press Ctrl+d to activate it, then preset delete to directly delete the current preset.<br/>
 - In case of a shader compilation error, MilkDrop3 will automatically update the shader (2>3>4) and try again.<br/>
-  You can disable this options in the MilkDropPanel.<br/>
-- I reduced the number of presets to 500, the cream of the cream, what a collection :)<br/><br/>
+This should remove the max instructions slots limit error! This mean you'll only see the same error not matter what went wrong.<br/>
+If you want to debug a preset, you should disable this option in the MilkDropPanel.<br/>
+- By default MilkDrop3 start in 'Sprites' mode, that mean you can direclty call sprites (pressing 00, 01, 02...) from the milk3_img.ini<br/>
+If you want to switch to 'Messages' mode, press Shift+k. Check the milk3_img.ini and milk3_msg.ini for more informations.<br/>
+Press F1 to see the new keys used for Sprites and Messages.<br/>
+I reduced the number of presets to 500, the cream of the cream, what a collection :)<br/><br/>
 
 ★ <ins>21/10/2023 : Version 3.23</ins><br/>
 - fixed some issues with display DPI scaling.<br/><br/>
