@@ -4,8 +4,8 @@
 - All the new features explained : https://youtu.be/QBsDXPENe1I<br/>
 - How to create a beautiful double-preset : https://youtu.be/AdcUPpp1O0k<br/>
 
-<img align="left" width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop324a.jpg">
-<img  width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop324b.jpg">
+<img align="left" width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop325a.jpg">
+<img  width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop325b.jpg">
 
 MilkDrop 3.0 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud, Winamp...)<br/>
 It is based on BeatDrop from Maxim Volskiy, so it's 100% compatible with any presets created with MilkDrop and projectM.<br/>
@@ -113,6 +113,29 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 <img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop32.jpg" width="600" />
 
 # History:
+
+★ <ins>24/12/2023 : Version 3.25</ins><br/>
+- Compatible with 96Hz audio.<br/>
+- Save any image directly in the .milk or .milk2 file!<br/>
+- Click and hold the right mouse button to move the sprite around the screen,<br/>
+resize it using your mouse wheel.<br/>
+- The sprite menu has been completely recoded.<br/>
+- Choose from 5 sprite layers with the 'Layers' menu: you can fully merge your image in the preset!<br/>
+- New sprite effects are available, and you can now cumulate them too.<br/>
+- You can choose a startup preset in the MilkDropPanel > Presets (default is MilkDrop2077 - Mandala.milk2).<br/>
+- Press 'ESC' to exit full-screen (this can be disabled).<br/>
+- Press the key ':' to change the pattern ('p') order (increment/decrement).<br/>
+- New file names: milk3.ini > settings.ini; milk3_img.ini > sprites.ini; milk3_msg.ini > messages.ini.<br/>
+- Multiple bugs fixed.<br/>
+- Stability should be better than ever.<br/>
+I've cleaned up a LOT of code and updated the project from VS Studio 2019 to 2022.<br/>
+- About the sprites: The folders 'sprites' and 'textures' are the same for MD3.<br/>
+You can put your images in either folder. When you save a preset with a sprite,<br/>
+MD3 will check if that image is present in 'textures' then 'sprites' folders and automatically link it to the preset.<br/>
+If an image with the same filename as the one you've loaded in MD3 is not found,<br/>
+it will be automatically copied from where you loaded it to the 'sprites' folder!<br/>
+Make sure your image is NOT too big; I recommend a maximum of 0.5 MB, as sprites are really slow to load.<br/>
+Read the sprites.ini file for more information.<br/><br/>
 
 ★ <ins>24/12/2023 : Version 3.24</ins><br/>
 - You can now inject effects directly in the shaders (toggle with F11 or use the menu).<br/>
