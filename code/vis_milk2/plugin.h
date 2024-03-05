@@ -60,6 +60,7 @@ typedef struct
 	float	long_avg[3];	// bass, mids, treble (absolute)
     float   fWave[2][576];
     float   fSpecLeft[MY_FFT_SAMPLES];
+    float   fSpecRight[MY_FFT_SAMPLES];
 } td_mysounddata;
 
 typedef struct
