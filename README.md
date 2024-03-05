@@ -114,7 +114,7 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
-★ <ins>24/12/2023 : Version 3.25</ins><br/>
+★ <ins>03/03/2024 : Version 3.25</ins><br/>
 - Compatible with 96Hz audio.<br/>
 - Save any image directly in the .milk or .milk2 file!<br/>
 - Click and hold the right mouse button to move the sprite around the screen,<br/>
