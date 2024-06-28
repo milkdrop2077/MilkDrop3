@@ -1,13 +1,14 @@
 # MilkDrop3
 
 - How to download and install : https://youtu.be/OQdZFlOHe5o<br/>
-- All the new features explained : https://youtu.be/QBsDXPENe1I<br/>
-- How to create a beautiful double-preset : https://youtu.be/AdcUPpp1O0k<br/>
+- How to create a double-preset : https://youtu.be/AdcUPpp1O0k<br/>
 
-<img align="left" width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop325a.jpg">
-<img  width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop325b.jpg">
+<img align="left" width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop326a.jpg">
+<img  width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop326b.jpg">
+<img align="left" width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop326c.jpg">
+<img  width="300" height="316" src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop326d.jpg">
 
-MilkDrop 3.0 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud, Winamp...)<br/>
+MilkDrop 3 is a portable program that supports any audio source (Spotify, YouTube, SoundCloud, Winamp...)<br/>
 It is based on BeatDrop from Maxim Volskiy, so it's 100% compatible with any presets created with MilkDrop and projectM.<br/>
 MilkDrop3 does everything that MilkDrop2 can do, I will be only listing on this page the additional new features :)<br/><br/>
 It supports a new type of double-preset (.milk2 file) mixing 2 presets and displaying them both simultaneously.<br/>
@@ -113,6 +114,19 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 <img src="https://github.com/milkdrop2077/MilkDrop3/raw/main/MilkDrop32.jpg" width="600" />
 
 # History:
+
+★ <ins>28/06/2024 : Version 3.26</ins><br/>
+- 6 new blending mode for sprites: Multiplicative, Subtractive, Invert, Cut-off, Darken, Vivid.<br/>
+- Press 'j' or 'J' to toggle the sprite blend modes and press 'n' to see the blend#.<br/>
+- Press 'g' to unlock a sprite saved in a milk file.<br/>
+- The total number of presets is displayed at the top when showing the load menu.<br/>
+- New function to never see the same preset twice!<br/>
+- The MilkDropPanel is now named MilkPanel and it has many new options.<br/>
+- Select the transition you want to see in the 'Transitions' tab.<br/>
+- You can now completely disable AlwaysOnTop, display the menu and the mouse pointer in fullscreen,<br/>
+  protect fullscreen mode, display transparent menus...<br/>
+- New 'Help' tab + help is now displayed at the bottom when moving the cursor.<br/>
+- Lots of small improvements and bugs fixed.<br/><br/>
 
 ★ <ins>03/03/2024 : Version 3.25</ins><br/>
 - Compatible with 96Hz audio.<br/>
