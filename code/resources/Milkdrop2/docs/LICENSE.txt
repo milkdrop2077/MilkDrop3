@@ -3,6 +3,8 @@
 Copyright 2005-2013 Nullsoft, Inc.
 All rights reserved.
 
+hey this is nathan 
+
 Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
