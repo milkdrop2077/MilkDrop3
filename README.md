@@ -115,6 +115,24 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
+★ <ins>25/12/2024 : Version 3.27</ins><br/>
+- Playlist support: Press "e" or "E" to add or remove a preset from the playlist,<br/>
+(a temporary playlist will be created in Milkdrop3\playlist.dat, you can continue it whenever you want).<br/>
+- Launch the MilkPanel > PLAYLIST to edit, clear or save your playlist.<br/>
+- To load your playlist, navigate to the Playlist > Load playlist menu in MilkDrop.<br/>
+If you want to exit and go back to the folder selection menu, click on Playlist > Stop playlist.<br/>
+The keys A, Z and M are disabled when a playlist is loaded for the moment.<br/>
+- Edit presets with the new MilkPanel: change the colors, add some effects, tweak the waveform, and more!<br/>
+If a setting like rotation isn't working, it may be getting overwritten or hidden elsewhere in the code.<br/>
+For instance, a large sprite could completely obscure the waveform, shapes, and warp shader.<br/>
+If the simple waveform isn’t visible, it’s likely because the opacity value is too low, making the wave transparent!<br/>
+To familiarize yourself with the features, try using the Blanks presets to explore,<br/>
+click on File > New to load the default Blank.milk preset.<br/>
+- To view the latest presets, go to the \Milkdrop3\presets folder, right-click > Sort by > Date Modified.<br/>
+Or load the Milkdrop3\playlist\new.txt playlist :)<br/>
+- New Feature: Select the screen number where you want MilkDrop to start.<br/>
+- Lots of small bugs fixed.<br/><br/>
+
 ★ <ins>28/06/2024 : Version 3.26</ins><br/>
 - 6 new blending mode for sprites: Multiplicative, Subtractive, Invert, Cut-off, Darken, Vivid.<br/>
 - Press 'j' or 'J' to toggle the sprite blend modes and press 'n' to see the blend#.<br/>
