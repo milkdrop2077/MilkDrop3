@@ -115,6 +115,25 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
+★ <ins>04/04/2025 : Version 3.28</ins><br/>
+- Automatic Graphics Card Selection: MilkDrop3 will now automatically use the most powerful graphics card available on your system.<br/>
+If you have a laptop with both integrated and dedicated GPUs,<br/>
+you'll notice a significant performance boost if you haven't manually set Windows to use your best GPU!<br/>
+For example, on a laptop with Intel graphics and an NVIDIA 4070, performance jumped from ~50 FPS to 165 FPS during testing!<br/>
+- Some New Amazing Presets: Using HLSL fragment shaders to display effects never before seen in MilkDrop!<br/>
+Try the playlist Milkdrop3\playlist\new.txt to load some of them!<br/>
+- New MilkPanel: Automatically displays the preset name, with values auto-adjusted for each new preset loaded,<br/>
+and now supports dark mode! A major bug preventing the SAVE button from working properly has been fixed,<br/>
+so the SAVE button works perfectly now!<br/>
+- Subdirectory Support for Playlists: You can now include subdirectories when creating playlists.<br/>
+- Startup Playlist Selection: Choose a playlist to load automatically when MilkDrop3 starts.<br/>
+- Playlist Improvements: Numerous small tweaks and patches have been made to improve the overall playlist experience.<br/>
+It now supports both relative and absolute paths.<br/>
+- Windows 7 Compatibility: The installer now includes the api-ms-win-shcore-scaling-l1-1-1.dll file for Windows 7 users.<br/>
+- New Options: Hide MilkDrop from the taskbar and hide all the errors.<br/>
+- Bug Fixes: Resolved an issue that prevented the use of q33-q64 variables.<br/>
+Fixed a bug where the menu bar wasn't hiding when using stretch mode.<br/><br/>
+
 ★ <ins>25/12/2024 : Version 3.27</ins><br/>
 - Playlist support: Press "e" or "E" to add or remove a preset from the playlist,<br/>
 (a temporary playlist will be created in Milkdrop3\playlist.dat, you can continue it whenever you want).<br/>
