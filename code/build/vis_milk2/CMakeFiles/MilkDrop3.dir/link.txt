@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/MilkDrop3.dir/plugin.cpp.o -o MilkDrop3  libmilkdrop_vis.a ../audio/libmilkdrop_audio.a ../ns-eel2/libmilkdrop_nseel.a /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 /usr/lib/x86_64-linux-gnu/libGL.so /usr/lib/x86_64-linux-gnu/libpulse-simple.so /usr/lib/x86_64-linux-gnu/libpulse.so -lpthread

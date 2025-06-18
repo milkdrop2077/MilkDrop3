@@ -1,0 +1,12 @@
+/app/code/build/CMakeFiles/edit_cache.dir
+/app/code/build/CMakeFiles/rebuild_cache.dir
+/app/code/build/audio/CMakeFiles/milkdrop_audio.dir
+/app/code/build/audio/CMakeFiles/edit_cache.dir
+/app/code/build/audio/CMakeFiles/rebuild_cache.dir
+/app/code/build/ns-eel2/CMakeFiles/milkdrop_nseel.dir
+/app/code/build/ns-eel2/CMakeFiles/edit_cache.dir
+/app/code/build/ns-eel2/CMakeFiles/rebuild_cache.dir
+/app/code/build/vis_milk2/CMakeFiles/milkdrop_vis.dir
+/app/code/build/vis_milk2/CMakeFiles/MilkDrop3.dir
+/app/code/build/vis_milk2/CMakeFiles/edit_cache.dir
+/app/code/build/vis_milk2/CMakeFiles/rebuild_cache.dir

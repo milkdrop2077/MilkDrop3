@@ -16,6 +16,7 @@
 #include <ShellScalingApi.h> // for dpi awareness
 #pragma comment(lib, "shcore.lib") // for dpi awareness
 
+#include "..\audio\loopback-capture.h" // For Start/StopAudioCapture
 #include "plugin.h"
 #include "resource.h"
 
@@ -209,13 +210,13 @@ void ToggleFullScreen(HWND hwnd) {
 
 LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch(uMsg) {
-        
+
         //BeatDrop2077 DoubleClick = fullscreen on/off
 	    case WM_LBUTTONDBLCLK:
 		ToggleFullScreen(hWnd);
-		break;    
-            
-            
+		break;
+
+
         case WM_CLOSE: {
             DestroyWindow( hWnd );
             UnregisterClassW(L"Direct3DWindowClass", NULL);
@@ -322,7 +323,7 @@ unsigned __stdcall CreateWindowAndRun(void* data) {
     // SPOUT
 	// Set Per Monitor awareness
     SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
-    
+
     if (!RegisterClassW(&wndClass)) {
         DWORD dwError = GetLastError();
         if (dwError != ERROR_CLASS_ALREADY_EXISTS) {
@@ -339,7 +340,7 @@ unsigned __stdcall CreateWindowAndRun(void* data) {
     RECT rc;
     SetRect(&rc, 0, 0, windowWidth, windowHeight);
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
-    
+
     // SPOUT
 	// Centre on the desktop work area
 	int WindowPosLeft = 0;
@@ -384,7 +385,7 @@ unsigned __stdcall CreateWindowAndRun(void* data) {
 
     ShowWindow(hwnd, SW_SHOW);
 
-   	// SPOUT
+	// SPOUT
 	// Make output resolution independent of the window size
 	// The user can adjust this subsequently by resizing the BeatBox window
 	// int lastWidth = windowWidth;
@@ -445,6 +446,7 @@ int StartThreads(HINSTANCE instance) {
 
     HRESULT hr = S_OK;
 
+#ifdef _WIN32
     hr = CoInitialize(NULL);
     if (FAILED(hr)) {
         ERR(L"CoInitialize failed: hr = 0x%08x", hr);
@@ -452,14 +454,11 @@ int StartThreads(HINSTANCE instance) {
     }
     CoUninitializeOnExit cuoe;
 
-    // argc==1 No additional params. Output disabled.
-    // argc==3 Two additional params. Output file enabled (32bit IEEE 754 FLOAT).
-    // argc==4 Three additional params. Output file enabled (LITTLE ENDIAN PCM).
+    // CPrefs logic is removed for now, assuming default audio capture.
+    // It can be re-introduced later if command-line configuration for audio is needed.
+    /*
     int argc = 1;
     LPCWSTR argv[4] = { L"", L"--file", L"loopback-capture.wav", L"--int-16" };
-    hr = S_OK;
-
-    // parse command line
     CPrefs prefs(argc, argv, hr);
     if (FAILED(hr)) {
         ERR(L"CPrefs::CPrefs constructor failed: hr = 0x%08x", hr);
@@ -469,6 +468,7 @@ int StartThreads(HINSTANCE instance) {
         // nothing to do
         return 0;
     }
+    */
 
     // create a "loopback capture has started" event
     HANDLE hStartedEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
@@ -489,26 +489,29 @@ int StartThreads(HINSTANCE instance) {
     // create arguments for loopback capture thread
     LoopbackCaptureThreadFunctionArguments threadArgs;
     threadArgs.hr = E_UNEXPECTED; // thread will overwrite this
-    threadArgs.pMMDevice = prefs.m_pMMDevice;
-    threadArgs.bInt16 = prefs.m_bInt16;
-    threadArgs.hFile = prefs.m_hFile;
+    // threadArgs.pMMDevice = prefs.m_pMMDevice; // Using NULL for default device
+    threadArgs.pMMDevice = NULL;
+    // threadArgs.bInt16 = prefs.m_bInt16;       // Using false for float
+    threadArgs.bInt16 = false;
+    // threadArgs.hFile = prefs.m_hFile;         // Using NULL for no file output
+    threadArgs.hFile = NULL;
     threadArgs.hStartedEvent = hStartedEvent;
     threadArgs.hStopEvent = hStopEvent;
     threadArgs.nFrames = 0;
 
-    HANDLE hThread = CreateThread(
+    HANDLE hAudioThread = CreateThread(
         NULL, 0,
         LoopbackCaptureThreadFunction, &threadArgs,
         0, NULL
     );
-    if (NULL == hThread) {
-        ERR(L"CreateThread failed: last error is %u", GetLastError());
+    if (NULL == hAudioThread) {
+        ERR(L"CreateThread for audio capture failed: last error is %u", GetLastError());
         return -__LINE__;
     }
-    CloseHandleOnExit closeThread(hThread);
+    CloseHandleOnExit closeAudioThread(hAudioThread);
 
     // wait for either capture to start or the thread to end
-    HANDLE waitArray[2] = { hStartedEvent, hThread };
+    HANDLE waitArray[2] = { hStartedEvent, hAudioThread };
     DWORD dwWaitResult;
     dwWaitResult = WaitForMultipleObjects(
         ARRAYSIZE(waitArray), waitArray,
@@ -516,156 +519,47 @@ int StartThreads(HINSTANCE instance) {
     );
 
     if (WAIT_OBJECT_0 + 1 == dwWaitResult) {
-        ERR(L"Thread aborted before starting to loopback capture: hr = 0x%08x", threadArgs.hr);
+        ERR(L"Audio capture thread aborted before starting: hr = 0x%08x", threadArgs.hr);
         return -__LINE__;
     }
 
     if (WAIT_OBJECT_0 != dwWaitResult) {
-        ERR(L"Unexpected WaitForMultipleObjects return value %u", dwWaitResult);
+        ERR(L"Unexpected WaitForMultipleObjects return value %u while waiting for audio thread", dwWaitResult);
         return -__LINE__;
     }
+#else
+    // For non-Windows platforms, call the new StartAudioCapture function
+    StartAudioCapture();
+#endif
 
-    // at this point capture is running
-    // wait for the user to press a key or for capture to error out
-    
-    /*HANDLE thread =*/ StartRenderThread(instance);
-    WaitForSingleObject(thread, INFINITE);
+    // at this point capture is (or should be) running
 
-    //NEED TO STOP CAPTURE
-    // at this point capture is running
-    // wait for the user to press a key or for capture to error out
-    {
-        WaitForSingleObjectOnExit waitForThread(hThread);
-        SetEventOnExit setStopEvent(hStopEvent);
-        HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
+    StartRenderThread(instance); // This is the UI/render thread
+    WaitForSingleObject(thread, INFINITE); // Wait for UI thread to finish (thread is the UI thread handle)
 
-        if (INVALID_HANDLE_VALUE == hStdIn) {
-            ERR(L"GetStdHandle returned INVALID_HANDLE_VALUE: last error is %u", GetLastError());
-            return -__LINE__;
+    // Stop audio capture
+#ifdef _WIN32
+    LOG(L"Render thread finished. Stopping Windows audio capture...");
+    if (hStopEvent) SetEvent(hStopEvent); // Signal the Windows audio capture thread to stop
+    if (hAudioThread) {
+        WaitForSingleObject(hAudioThread, INFINITE); // Wait for Windows audio thread to finish
+        // Check thread exit code and HRESULT (optional, for debugging)
+        DWORD exitCode;
+        if (GetExitCodeThread(hAudioThread, &exitCode) && exitCode != 0) {
+             ERR(L"Loopback capture thread exit code is %u; expected 0", exitCode);
         }
-
-        LOG(L"%s", L"Press Enter to quit...");
-
-        HANDLE rhHandles[2] = { hThread, hStdIn };
-
-        bool bKeepWaiting = true;
-        while (bKeepWaiting) {
-
-            dwWaitResult = WaitForMultipleObjects(2, rhHandles, FALSE, INFINITE);
-
-            switch (dwWaitResult) {
-
-            case WAIT_OBJECT_0: // hThread
-                ERR(L"%s", L"The thread terminated early - something bad happened");
-                bKeepWaiting = false;
-                break;
-
-            case WAIT_OBJECT_0 + 1: // hStdIn
-                                    // see if any of them was an Enter key-up event
-                /*INPUT_RECORD rInput[128];
-                DWORD nEvents;
-                if (!ReadConsoleInput(hStdIn, rInput, ARRAYSIZE(rInput), &nEvents)) {
-                    ERR(L"ReadConsoleInput failed: last error is %u", GetLastError());
-                    bKeepWaiting = false;
-                }
-                else {
-                    for (DWORD i = 0; i < nEvents; i++) {
-                        if (
-                            KEY_EVENT == rInput[i].EventType &&
-                            VK_RETURN == rInput[i].Event.KeyEvent.wVirtualKeyCode &&
-                            !rInput[i].Event.KeyEvent.bKeyDown
-                            ) {*/
-                            LOG(L"%s", L"Stopping capture...");
-                            bKeepWaiting = false;
-                            break;
-                /*        }
-                    }
-                    // if none of them were Enter key-up events,
-                    // continue waiting
-                }*/
-                break;
-
-            default:
-                ERR(L"WaitForMultipleObjects returned unexpected value 0x%08x", dwWaitResult);
-                bKeepWaiting = false;
-                break;
-            } // switch
-        } // while
-    } // naked scope
-
-    // at this point the thread is definitely finished
-
-    DWORD exitCode;
-    if (!GetExitCodeThread(hThread, &exitCode)) {
-        ERR(L"GetExitCodeThread failed: last error is %u", GetLastError());
-        return -__LINE__;
-    }
-
-    if (0 != exitCode) {
-        ERR(L"Loopback capture thread exit code is %u; expected 0", exitCode);
-        return -__LINE__;
-    }
-
-    if (S_OK != threadArgs.hr) {
-        ERR(L"Thread HRESULT is 0x%08x", threadArgs.hr);
-        return -__LINE__;
-    }
-
-    if (NULL != prefs.m_szFilename) {
-        // everything went well... fixup the fact chunk in the file
-        MMRESULT result = mmioClose(prefs.m_hFile, 0);
-        prefs.m_hFile = NULL;
-        if (MMSYSERR_NOERROR != result) {
-            ERR(L"mmioClose failed: MMSYSERR = %u", result);
-            return -__LINE__;
-        }
-
-        // reopen the file in read/write mode
-        MMIOINFO mi = { 0 };
-        prefs.m_hFile = mmioOpenW(const_cast<LPWSTR>(prefs.m_szFilename), &mi, MMIO_READWRITE);
-        if (NULL == prefs.m_hFile) {
-            ERR(L"mmioOpen(\"%ls\", ...) failed. wErrorRet == %u", prefs.m_szFilename, mi.wErrorRet);
-            return -__LINE__;
-        }
-
-        // descend into the RIFF/WAVE chunk
-        MMCKINFO ckRIFF = { 0 };
-        ckRIFF.ckid = MAKEFOURCC('W', 'A', 'V', 'E'); // this is right for mmioDescend
-        result = mmioDescend(prefs.m_hFile, &ckRIFF, NULL, MMIO_FINDRIFF);
-        if (MMSYSERR_NOERROR != result) {
-            ERR(L"mmioDescend(\"WAVE\") failed: MMSYSERR = %u", result);
-            return -__LINE__;
-        }
-
-        // descend into the fact chunk
-        MMCKINFO ckFact = { 0 };
-        ckFact.ckid = MAKEFOURCC('f', 'a', 'c', 't');
-        result = mmioDescend(prefs.m_hFile, &ckFact, &ckRIFF, MMIO_FINDCHUNK);
-        if (MMSYSERR_NOERROR != result) {
-            ERR(L"mmioDescend(\"fact\") failed: MMSYSERR = %u", result);
-            return -__LINE__;
-        }
-
-        // write the correct data to the fact chunk
-        LONG lBytesWritten = mmioWrite(
-            prefs.m_hFile,
-            reinterpret_cast<PCHAR>(&threadArgs.nFrames),
-            sizeof(threadArgs.nFrames)
-        );
-        if (lBytesWritten != sizeof(threadArgs.nFrames)) {
-            ERR(L"Updating the fact chunk wrote %u bytes; expected %u", lBytesWritten, (UINT32)sizeof(threadArgs.nFrames));
-            return -__LINE__;
-        }
-
-        // ascend out of the fact chunk
-        result = mmioAscend(prefs.m_hFile, &ckFact, 0);
-        if (MMSYSERR_NOERROR != result) {
-            ERR(L"mmioAscend(\"fact\") failed: MMSYSERR = %u", result);
-            return -__LINE__;
+        if (threadArgs.hr != S_OK) {
+            ERR(L"Audio capture thread HRESULT is 0x%08x", threadArgs.hr);
         }
     }
+#else
+    // For non-Windows platforms, call the new StopAudioCapture function
+    LOG("Render thread finished. Stopping Linux audio capture...");
+    StopAudioCapture();
+#endif
 
-    // let prefs' destructor call mmioClose
+    // File writing logic (prefs.m_szFilename related) is removed for now.
+    // It was Windows-specific and tied to CPrefs.
 
     return 0;
 }

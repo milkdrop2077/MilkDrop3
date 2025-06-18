@@ -1,5 +1,6 @@
 // loopback-capture.cpp
 
+#ifdef _WIN32
 #include "common.h"
 
 HRESULT LoopbackCapture(
@@ -59,7 +60,7 @@ HRESULT LoopbackCapture(
         return hr;
     }
     ReleaseOnExit releaseAudioClient(pAudioClient);
-    
+
     // get the default device periodicity
     REFERENCE_TIME hnsDefaultDevicePeriod;
     hr = pAudioClient->GetDevicePeriod(&hnsDefaultDevicePeriod, NULL);
@@ -134,7 +135,7 @@ HRESULT LoopbackCapture(
 
     UINT32 nBlockAlign = pwfx->nBlockAlign;
     *pnFrames = 0;
-    
+
     // call IAudioClient::Initialize
     // note that AUDCLNT_STREAMFLAGS_LOOPBACK and AUDCLNT_STREAMFLAGS_EVENTCALLBACK
     // do not work together...
@@ -188,7 +189,7 @@ HRESULT LoopbackCapture(
         return HRESULT_FROM_WIN32(dwErr);
     }
     CancelWaitableTimerOnExit cancelWakeUp(hWakeUp);
-    
+
     // call IAudioClient::Start
     hr = pAudioClient->Start();
     if (FAILED(hr)) {
@@ -198,7 +199,7 @@ HRESULT LoopbackCapture(
     AudioClientStopOnExit stopAudioClient(pAudioClient);
 
     SetEvent(hStartedEvent);
-    
+
     // loopback capture loop
     HANDLE waitArray[2] = { hStopEvent, hWakeUp };
     DWORD dwWaitResult;
@@ -259,8 +260,14 @@ HRESULT LoopbackCapture(
             else
             {
                 // Saving audio data for visualizer
-                SetAudioBuf(pData, nNumFramesToRead, pwfx, bInt16);
-                
+                bool is_float = (pwfx->wFormatTag == WAVE_FORMAT_IEEE_FLOAT ||
+                                 (pwfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE &&
+                                  IsEqualGUID(KSDATAFORMAT_SUBTYPE_IEEE_FLOAT, reinterpret_cast<PWAVEFORMATEXTENSIBLE>(pwfx)->SubFormat)));
+                // If bInt16 is true, then the format has been coerced to PCM 16-bit already.
+                // So, if bInt16 is true, is_float should be false.
+                if (bInt16) is_float = false;
+                SetAudioBuf(pData, nNumFramesToRead, pwfx->nChannels, pwfx->wBitsPerSample, is_float);
+
                 if (NULL != hFile) {
                     // Writing the buffer captured to the output .wav file
                     LONG lBytesToWrite = nNumFramesToRead * nBlockAlign;
@@ -328,7 +335,7 @@ HRESULT WriteWaveHeader(HMMIO hFile, LPCWAVEFORMATEX pwfx, MMCKINFO *pckRIFF, MM
         ERR(L"mmioCreateChunk(\"RIFF/WAVE\") failed: MMRESULT = 0x%08x", result);
         return E_FAIL;
     }
-    
+
     // make a 'fmt ' chunk (within the RIFF/WAVE chunk)
     MMCKINFO chunk;
     chunk.ckid = MAKEFOURCC('f', 'm', 't', ' ');
@@ -357,7 +364,7 @@ HRESULT WriteWaveHeader(HMMIO hFile, LPCWAVEFORMATEX pwfx, MMCKINFO *pckRIFF, MM
         ERR(L"mmioAscend(\"fmt \" failed: MMRESULT = 0x%08x", result);
         return E_FAIL;
     }
-    
+
     // make a 'fact' chunk whose data is (DWORD)0
     chunk.ckid = MAKEFOURCC('f', 'a', 'c', 't');
     result = mmioCreateChunk(hFile, &chunk, 0);
@@ -408,5 +415,141 @@ HRESULT FinishWaveFile(HMMIO hFile, MMCKINFO *pckRIFF, MMCKINFO *pckData) {
         return E_FAIL;
     }
 
-    return S_OK;    
+    return S_OK;
 }
+
+#else // Linux/PulseAudio implementation
+
+#include <stdio.h>
+#include <string.h>
+#include <pthread.h>
+#include <unistd.h> // for usleep
+
+#include <pulse/simple.h>
+#include <pulse/error.h>
+
+#include "audiobuf.h" // Assuming this will be made cross-platform
+#include "log.h"      // Assuming this will be made cross-platform
+
+// Forward declaration for functions that might be called by other files if necessary
+// For now, StartAudioCapture and StopAudioCapture are the main public interface.
+void StartAudioCapture();
+void StopAudioCapture();
+
+static pa_simple *s_pa_simple = NULL;
+static pthread_t capture_thread_id = 0; // Initialize to 0
+static volatile int stop_capture_flag = 0;
+
+// This function will contain the core PulseAudio capture logic
+void LoopbackCaptureLinux() {
+    pa_sample_spec ss;
+    ss.format = PA_SAMPLE_FLOAT32LE; // Using float32 for now
+    ss.rate = 44100;
+    ss.channels = 2;
+
+    int error;
+
+    // Create a new PulseAudio simple connection
+    s_pa_simple = pa_simple_new(
+        NULL,                // Use the default server
+        "MilkDrop3",         // Application name
+        PA_STREAM_RECORD,    // We want to record
+        NULL,                // Use the default device
+        "audio capture",     // Description of the stream
+        &ss,                 // Sample format
+        NULL,                // Use default channel map
+        NULL,                // Use default buffering attributes
+        &error               // Error code
+    );
+
+    if (!s_pa_simple) {
+        ERR("pa_simple_new() failed: %s", pa_strerror(error));
+        return;
+    }
+
+    LOG("PulseAudio connection established for recording.");
+
+    while (!stop_capture_flag) {
+        float read_buf[256 * 2]; // Buffer for 256 stereo float samples
+        int pa_error;
+
+        // Read data from PulseAudio server
+        if (pa_simple_read(s_pa_simple, read_buf, sizeof(read_buf), &pa_error) < 0) {
+            ERR("pa_simple_read() failed: %s", pa_strerror(pa_error));
+            // In case of error, cleanup and exit thread
+            if (s_pa_simple) {
+                pa_simple_free(s_pa_simple);
+                s_pa_simple = NULL;
+            }
+            return;
+        }
+
+        // TODO: Process the audio data - pass to SetAudioBuf
+        // Process the audio data - pass to SetAudioBuf
+        // Data is float read_buf[256*2], 256 frames, 2 channels, 32 bits per sample (float)
+        SetAudioBuf(reinterpret_cast<const unsigned char*>(read_buf),
+                    256, // nNumFramesToRead
+                    ss.channels,
+                    32,  // bits_per_sample for PA_SAMPLE_FLOAT32LE
+                    true // is_float
+                    );
+        // LOG("Processed 256 frames from PulseAudio into audio buffer.");
+
+
+        // Simulate some processing or delay if needed, or remove sleep for real-time processing
+        usleep(10000); // Sleep for 10ms to avoid busy-looping too fast
+    }
+
+    // Cleanup PulseAudio connection
+    if (s_pa_simple) {
+        pa_simple_free(s_pa_simple);
+        s_pa_simple = NULL;
+        LOG("PulseAudio connection freed.");
+    }
+}
+
+// Thread function to run LoopbackCaptureLinux
+void* LoopbackCaptureThreadFunctionLinux(void* arg) {
+    (void)arg; // Mark argument as unused
+    LOG("Starting Linux loopback capture thread.");
+    LoopbackCaptureLinux(); // Call the main capture function
+    LOG("Exiting Linux loopback capture thread.");
+    pthread_exit(NULL); // Ensure thread exits cleanly
+    return NULL;
+}
+
+// Public API to start audio capture
+void StartAudioCapture() {
+    LOG("Attempting to start audio capture...");
+    stop_capture_flag = 0; // Reset the stop flag
+
+    if (capture_thread_id != 0) {
+        LOG("Capture thread already running or not properly cleaned up.");
+        // Optionally, try to stop/join it first or return an error
+        // For now, we'll just log and attempt to create a new one if it's 0
+    }
+
+    if (pthread_create(&capture_thread_id, NULL, LoopbackCaptureThreadFunctionLinux, NULL) != 0) {
+        ERR("Failed to create Linux capture thread.");
+        capture_thread_id = 0; // Ensure it's zero on failure
+    } else {
+        LOG("Linux capture thread created successfully with ID: %ld", (long)capture_thread_id);
+    }
+}
+
+// Public API to stop audio capture
+void StopAudioCapture() {
+    LOG("Attempting to stop audio capture...");
+    if (capture_thread_id != 0) {
+        stop_capture_flag = 1; // Signal the thread to stop
+        LOG("Joining Linux capture thread ID: %ld...", (long)capture_thread_id);
+        pthread_join(capture_thread_id, NULL); // Wait for the thread to complete
+        capture_thread_id = 0; // Reset thread ID
+        LOG("Linux capture thread stopped and joined.");
+    } else {
+        LOG("Capture thread not running or already stopped.");
+    }
+    stop_capture_flag = 0; // Reset flag for next start
+}
+
+#endif // _WIN32

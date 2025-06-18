@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmilkdrop_audio.a CMakeFiles/milkdrop_audio.dir/audiobuf.cpp.o CMakeFiles/milkdrop_audio.dir/log.cpp.o "CMakeFiles/milkdrop_audio.dir/loopback-capture.cpp.o"
+/usr/bin/ranlib libmilkdrop_audio.a
