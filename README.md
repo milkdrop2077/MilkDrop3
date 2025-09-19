@@ -115,6 +115,21 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
+★ <ins>20/09/2025 : Version 3.31</ins><br/>
+- Full support for Hi-Res audio devices (24-bit/192kHz and beyond).<br/>
+- Resolved compatibility issues with ATI / AMD PS4 shaders.<br/>
+- New shader cache: all shaders are now precompiled for faster performance.<br/>
+- Introducing a new custom VM with enhanced stability: MilkDrop no longer crashes.<br/> 
+- New modern presets that truly blow the older ones away (GPU power required!).<br/>
+- New Hardcut Mode #7 with effects auto-injected based on beat detection.<br/>
+- New MilkPanel with shader code editor. Supports:<br/>
+      COPY/CUT/PASTE<br/>
+      CTRL+Z: Undo<br/>
+      CTRL+Y: Redo<br/>
+      CTRL+ENTER: recompile<br/>
+      CTRL+SPACE: autocomplete<br/>
+      Code folding....<br/><br/>
+
 ★ <ins>04/04/2025 : Version 3.28</ins><br/>
 - Automatic Graphics Card Selection: MilkDrop3 will now automatically use the most powerful graphics card available on your system.<br/>
 If you have a laptop with both integrated and dedicated GPUs,<br/>
