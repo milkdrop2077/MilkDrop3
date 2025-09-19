@@ -119,9 +119,12 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 - Full support for Hi-Res audio devices (24-bit/192kHz and beyond).<br/>
 - Resolved compatibility issues with ATI / AMD PS4 shaders.<br/>
 - New shader cache: all shaders are now precompiled for faster performance.<br/>
+- The shader cache is 'smart', only the new presets will be saved in the cache.<br/>
 - Introducing a new custom VM with enhanced stability: MilkDrop no longer crashes.<br/> 
 - New modern presets that truly blow the older ones away (GPU power required!).<br/>
 - New Hardcut Mode #7 with effects auto-injected based on beat detection.<br/>
+- VJ mode is back.<br/>
+- See all the Q variables values at once (press the 'N' key twice).<br/>
 - New MilkPanel with shader code editor. Supports:<br/>
       COPY/CUT/PASTE<br/>
       CTRL+Z: Undo<br/>
