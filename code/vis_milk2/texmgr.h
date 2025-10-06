@@ -35,6 +35,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define NUM_TEX 16
 
+#define TEXMGR_ERR_SUCCESS          0
+#define TEXMGR_ERR_BAD_INDEX        1
+#define TEXMGR_ERR_OUTOFMEM         2
+#define TEXMGR_ERR_BADFILE          3
+#define TEXMGR_WARN_ERROR_IN_INIT_CODE 4
+#define TEXMGR_WARN_ERROR_IN_REG_CODE 8
+
+
 class texmgr
 {
 public:
@@ -45,31 +53,38 @@ public:
 	void Finish();
 
 	void KillTex(int iSlot);
-	bool LoadTex(const wchar_t* szFilename, int iSlot, bool* bTextureWasCleared, int* pCurTexSize);
+    int LoadTex(const char* szFilename, int iSlot, char *szInitCode, char *szCode, float time, int frame, unsigned int ck);
 	void SetTex(int iSlot);
     void SetUserTex(int iSlot, LPDIRECT3DTEXTURE9 pTex);
-    void SetUserTex(int iSlot, const wchar_t* szFilename);
+    void SetUserTex(int iSlot, const char* szFilename);
 
 protected:
-	LPDIRECT3DDEVICE9 m_lpDevice;
+	LPDIRECT3DDEVICE9 m_lpDD;
+    void StripLinefeedCharsAndComments(char *src, char *dest);
+    bool RunInitCode(int iSlot, char *szInitCode);
+    bool RecompileExpressions(int iSlot);
+    void FreeVars(int iSlot);
+    void FreeCode(int iSlot);
+    void RegisterBuiltInVariables(int iSlot);
 
 public:
 	typedef struct
 	{
 		LPDIRECT3DTEXTURE9 pSurface;
-		wchar_t       szFile[MAX_PATH];
+		char          szFileName[MAX_PATH];
+        char          m_szExpr[768];
 		int           nLoaded;	// 0 for not loaded, 1 for loaded, 2 for failed.
 		int           nTexSize;
 		int           img_w, img_h;
 		int           tex_w, tex_h;
 
 		// for expression evaluation:
-		NSEEL_VMCTX m_eel_ctx;
+		NSEEL_VMCTX tex_eel_ctx;
 		NSEEL_CODEHANDLE m_codehandle;
-		double *var_x, *var_y, *var_sx, *var_sy, *var_rot, *var_r, *var_g, *var_b, *var_a, *var_flipx, *var_flipy, *var_repeatx, *var_repeaty;
-		double *var_time, *var_frame, *var_fps, *var_progress, *var_bass, *var_mid, *var_treb, *var_bass_att, *var_mid_att, *var_treb_att;
-		double *var_done;
-		double *var_burn;
+		float *var_x, *var_y, *var_sx, *var_sy, *var_rot, *var_r, *var_g, *var_b, *var_a, *var_flipx, *var_flipy, *var_repeatx, *var_repeaty, *var_blendmode;
+		float *var_time, *var_frame, *var_fps, *var_progress, *var_bass, *var_mid, *var_treb, *var_bass_att, *var_mid_att, *var_treb_att;
+		float *var_done;
+		float *var_burn;
 		int    nStartFrame;
 		float  fStartTime;
 	}

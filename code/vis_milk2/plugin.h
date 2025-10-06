@@ -71,18 +71,18 @@ typedef struct
 	int		nCursorPos;
 	int		nSelAnchorPos;		// -1 if no selection made
 	int 	bOvertypeMode;
-	wchar_t	szText[48000];
-	wchar_t	szPrompt[512];
-	wchar_t	szToolTip[512];
+	char	szText[48000];
+	char	szPrompt[512];
+	char	szToolTip[512];
 	char	szClipboard[48000];
-	wchar_t	szClipboardW[48000];
+	char	szClipboardW[48000];
 } td_waitstr;
 
 typedef struct
 {
 	int 	bBold;
 	int 	bItal;
-	wchar_t	szFace[128];
+	char	szFace[128];
 	int		nColorR;    // 0..255
 	int		nColorG;    // 0..255
 	int		nColorB;    // 0..255
@@ -125,9 +125,9 @@ typedef struct
 	int  	nRandB;
 	int     bBold;
 	int     bItal;
-	wchar_t szFace[128];
+	char szFace[128];
 
-	wchar_t	szText[256];
+	char	szText[256];
 }
 td_custom_msg;
 
@@ -136,8 +136,8 @@ typedef struct
 	int 	bRedrawSuperText;	// true if it needs redraw
 	int 	bIsSongTitle;		// false for custom message, true for song title
 	//char	szText[256];
-	wchar_t	szTextW[256];
-	wchar_t	nFontFace[128];
+	char	szTextW[256];
+	char	nFontFace[128];
 	int 	bBold;
 	int 	bItal;
 	float	fX;
@@ -156,7 +156,7 @@ td_supertext;
 
 typedef struct
 {
-    wchar_t        texname[256];   // ~filename, but without path or extension!
+    char        texname[256];   // ~filename, but without path or extension!
     LPDIRECT3DBASETEXTURE9 texptr;
     int                w,h,d;
     //D3DXHANDLE         texsize_param;
@@ -167,7 +167,7 @@ typedef struct
 
 typedef struct
 {
-    std::wstring    texname;  // just for ref
+    std::string    texname;  // just for ref
     D3DXHANDLE texsize_param;
     int        w,h;
 } TexSizeParamInfo;
@@ -181,7 +181,7 @@ typedef struct
 
 typedef struct
 {
-    std::wstring   msg;
+    std::string   msg;
     bool      bBold;  // true == red bkg; false == black bkg
     float     birthTime;
     float     expireTime;
@@ -263,7 +263,7 @@ typedef struct
 
 typedef struct
 {
-    std::wstring  szFilename;    // without path
+    std::string  szFilename;    // without path
     float    fRatingThis;
     float    fRatingCum;
 } PresetInfo;
@@ -385,7 +385,7 @@ public:
         CState		*m_pOldState;			// points to previous CState
         CState		*m_pNewState;			// points to the coming CState - we're not yet blending to it b/c we're still compiling the shaders for it!
         int         m_nLoadingPreset;
-        wchar_t     m_szLoadingPreset[MAX_PATH];
+        char     m_szLoadingPreset[MAX_PATH];
         float       m_fLoadingPresetBlendTime;
         int         m_nPresetsLoadedTotal; //important for texture eviction age-tracking...
         CState		m_state_DO_NOT_USE[3];	// do not use; use pState and pOldState instead.
@@ -420,10 +420,10 @@ public:
         int			m_nCurrentPreset;	// Index of the currently-RUNNING preset.
 								        //   Note that this is NOT the same as the currently-highlighted preset! (that's m_nPresetListCurPos)
 								        //   Be careful - this can be -1 if the user changed dir. & a new preset hasn't been loaded yet.
-        wchar_t		m_szCurrentPresetFile[512];	// w/o path.  this is always valid (unless no presets were found)
+        char		m_szCurrentPresetFile[512];	// w/o path.  this is always valid (unless no presets were found)
         PresetList  m_presets;
 	    void		UpdatePresetList(bool bBackground=false, bool bForce=false, bool bTryReselectCurrentPreset=true);
-        wchar_t     m_szUpdatePresetMask[MAX_PATH];
+        char     m_szUpdatePresetMask[MAX_PATH];
         bool        m_bPresetListReady;
 	    //void		UpdatePresetRatings();
         //int         m_nRatingReadProgress;  // equals 'm_nPresets' if all ratings are read in & ready to go; -1 if uninitialized; otherwise, it's still reading them in, and range is: [0 .. m_nPresets-1]
@@ -431,7 +431,7 @@ public:
 
         // PRESET HISTORY
         #define PRESET_HIST_LEN (64+2)     // make this 2 more than the # you REALLY want to be able to go back.
-        std::wstring     m_presetHistory[PRESET_HIST_LEN];   //circular
+        std::string     m_presetHistory[PRESET_HIST_LEN];   //circular
         int         m_presetHistoryPos;
         int         m_presetHistoryBackFence;
         int         m_presetHistoryFwdFence;
@@ -460,17 +460,17 @@ public:
                               // NOTE: each NOTIFY msg clears all the old NOTIFY messages!
         #define ERR_SCANNING_PRESETS 5
         ErrorMsgList m_errors;
-        void        AddError(wchar_t* szMsg, float fDuration, int category=ERR_ALL, bool bBold=true);
+        void        AddError(const char* szMsg, float fDuration, int category=ERR_ALL, bool bBold=true);
         void        ClearErrors(int category=ERR_ALL);  // 0=all categories
 
 
-        void GetSongTitle(wchar_t *szSongTitle, int nSize);
+        void GetSongTitle(char *szSongTitle, int nSize);
 
         //musik::core::sdk::IPlaybackService* playbackService;
         std::string emulatedWinampSongTitle;
         char		m_szDebugMessage[512];
-        wchar_t		m_szSongTitle    [512];
-        wchar_t		m_szSongTitlePrev[512];
+        char		m_szSongTitle    [512];
+        char		m_szSongTitlePrev[512];
 
         // stuff for menu system:
         CMilkMenu	*m_pCurMenu;	// should always be valid!
@@ -485,10 +485,10 @@ public:
         CMilkMenu    m_menuShapecode[MAX_CUSTOM_SHAPES];
         bool         m_bShowShaderHelp;
 
-        wchar_t		m_szMilkdrop2Path[MAX_PATH];		// ends in a backslash
-        wchar_t		m_szMsgIniFile[MAX_PATH];
-        wchar_t     m_szImgIniFile[MAX_PATH];
-        wchar_t		m_szPresetDir[MAX_PATH];
+        char		m_szMilkdrop2Path[MAX_PATH];		// ends in a backslash
+        char		m_szMsgIniFile[MAX_PATH];
+        char     m_szImgIniFile[MAX_PATH];
+        char		m_szPresetDir[MAX_PATH];
         float		m_fRandStart[4];
 
         // DIRECTX 9:
@@ -555,26 +555,26 @@ public:
         void RenderFrame(int bRedraw);
         void AlignWave(int nSamples);
 
-        void        DrawTooltip(wchar_t* str, int xR, int yB);
+        void        DrawTooltip(const char* str, int xR, int yB);
         void        RandomizeBlendPattern();
         void        GenPlasma(int x0, int x1, int y0, int y1, float dt);
         void        LoadPerFrameEvallibVars(CState* pState);
         void        LoadCustomWavePerFrameEvallibVars(CState* pState, int i);
         void        LoadCustomShapePerFrameEvallibVars(CState* pState, int i, int instance);
 	void		WriteRealtimeConfig();	// called on Finish()
-	    void		dumpmsg(wchar_t *s);
+	    void		dumpmsg(const char *s);
 	    void		Randomize();
 	    void		LoadRandomPreset(float fBlendTime);
-	    void		LoadPreset(const wchar_t *szPresetFilename, float fBlendTime);
+	    void		LoadPreset(const char *szPresetFilename, float fBlendTime);
         void        LoadPresetTick();
         void        FindValidPresetDir();
-	    wchar_t*	GetMsgIniFile()    { return m_szMsgIniFile; };
-	    wchar_t*    GetPresetDir()     { return m_szPresetDir; };
-	    void		SavePresetAs(wchar_t *szNewFile);		// overwrites the file if it was already there.
-	    void		DeletePresetFile(wchar_t *szDelFile);
-	    void		RenamePresetFile(wchar_t *szOldFile, wchar_t *szNewFile);
+	    char*	GetMsgIniFile()    { return m_szMsgIniFile; };
+	    char*    GetPresetDir()     { return m_szPresetDir; };
+	    void		SavePresetAs(char *szNewFile);		// overwrites the file if it was already there.
+	    void		DeletePresetFile(char *szDelFile);
+	    void		RenamePresetFile(char *szOldFile, char *szNewFile);
 	    void		SetCurrentPresetRating(float fNewRating);
-	    void		SeekToPreset(wchar_t cStartChar);
+	    void		SeekToPreset(char cStartChar);
 	    bool		ReversePropagatePoint(float fx, float fy, float *fx2, float *fy2);
 	    int 		HandleRegularKey(WPARAM wParam);
 	    bool		OnResizeGraphicsWindow();
@@ -614,8 +614,8 @@ public:
         void        UvToMathSpace(float u, float v, float* rad, float* ang);
         void        ApplyShaderParams(CShaderParams* p, LPD3DXCONSTANTTABLE pCT, CState* pState);
         void        RestoreShaderParams();
-        bool        AddNoiseTex(const wchar_t* szTexName, int size, int zoom_factor);
-        bool        AddNoiseVol(const wchar_t* szTexName, int size, int zoom_factor);
+        bool        AddNoiseTex(const char* szTexName, int size, int zoom_factor);
+        bool        AddNoiseVol(const char* szTexName, int size, int zoom_factor);
 
 
     //====[ 3. virtual functions: ]===========================================================================

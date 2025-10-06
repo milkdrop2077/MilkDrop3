@@ -29,11 +29,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "support.h"
 #include "utility.h"
+#include <wchar.h>
 
 bool g_bDebugOutput = false;
 bool g_bDumpFileCleared = false;
 
 //---------------------------------------------------
+#ifdef _WIN32
 void PrepareFor3DDrawing(
         IDirect3DDevice9 *pDevice,
         int viewport_width,
@@ -245,8 +247,9 @@ void MakeProjectionMatrix( D3DXMATRIX* pOut,
     pOut->_43 = -Q*near_plane;
     pOut->_34 = 1;
 }
+#endif
 
-void FormatSongTime(double seconds, wchar_t *dst)
+void FormatSongTime(double seconds, char *dst)
 {
     int millis = (int) seconds * 1000;
     // note: size(szSongLen[]) must be at least 64.
@@ -255,11 +258,12 @@ void FormatSongTime(double seconds, wchar_t *dst)
     {
 		int len_s = millis/1000;
 		int minutes = len_s/60;
-		int seconds = len_s - minutes*60;
-		swprintf(dst, L"%d:%02d", minutes, seconds);
+		int seconds_rem = len_s - minutes*60;
+		sprintf(dst, "%d:%02d", minutes, seconds_rem);
     }
 }
 
+#ifdef _WIN32
 int GetDX9TexFormatBitsPerPixel(D3DFORMAT fmt)
 {
     switch(fmt)
@@ -319,3 +323,4 @@ int GetDX9TexFormatBitsPerPixel(D3DFORMAT fmt)
 
     return 32;
 }
+#endif

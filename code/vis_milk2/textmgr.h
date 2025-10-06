@@ -57,7 +57,7 @@ public:
     CTextManager();
     ~CTextManager();
 
-    void Init(LPDIRECT3DDEVICE9 lpDevice, IDirect3DTexture9** lpTextSurface, int bAdditive);
+    void Init(LPDIRECT3DDEVICE9 lpDevice, IDirect3DTexture9* lpTextSurface, int bAdditive);
     void Finish();
 
     int  DrawTextA(LPD3DXFONT pFont, const char* szText, int len, RECT* pRect, DWORD flags, DWORD color, bool bBlackBox, DWORD boxColor=0xFF000000);
@@ -69,7 +69,7 @@ public:
 
 protected:
     LPDIRECT3DDEVICE9    m_lpDevice;
-    IDirect3DTexture9**  m_lpTextSurface;
+    IDirect3DTexture9*   m_lpTextSurface;
     int                  m_blit_additively;
 
     int       m_nMsg[2];

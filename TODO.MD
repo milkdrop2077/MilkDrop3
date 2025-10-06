@@ -4,14 +4,10 @@ This file outlines the remaining tasks to complete the Linux port of MilkDrop3.
 
 ## Current Blocker
 
-The project is currently blocked from compiling due to a pointer type mismatch error in `vis_milk2/pluginshell.cpp`.
+The project is currently blocked from compiling due to a series of compilation and linker errors. The main issues are:
 
-- **File:** `vis_milk2/pluginshell.cpp`
-- **Function:** `CPluginShell::AllocateDX9Stuff()`
-- **Error:** `invalid conversion from ‘void***’ to ‘void**’`
-- **Problematic Line:** `m_text.Init(GetDevice(), (IDirect3DTexture9**)&m_lpDDSText, 1);`
-
-The `m_text.Init` function expects a `IDirect3DTexture9**` (which is a `void**`), but the cast `(IDirect3DTexture9**)` applied to `&m_lpDDSText` (which is already a `void**`) results in a `void***`, causing the compilation to fail. The immediate next step is to resolve this pointer issue to achieve a successful build.
+- **Missing `y.tab.h`:** The `nseel-lextab.c` file is missing the `y.tab.h` header, which is a generated file from the `yacc` or `bison` parser generator. This file needs to be generated as part of the build process.
+- **Linker Errors:** The project is still experiencing linker errors related to multiple definitions and undefined references. This indicates that the `CMakeLists.txt` file still needs to be refined to correctly include all the necessary source files and to handle the dependencies between them.
 
 ## High Priority
 

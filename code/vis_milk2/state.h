@@ -128,37 +128,37 @@ public:
 
 	// for per-frame expression evaluation:
 		NSEEL_VMCTX m_pf_eel;
-	double *var_pf_time, *var_pf_fps;
-	double *var_pf_frame;
-	double *var_pf_progress;
-	//double *var_pf_q1, *var_pf_q2, *var_pf_q3, *var_pf_q4, *var_pf_q5, *var_pf_q6, *var_pf_q7, *var_pf_q8;
-	//double *var_pf_t1, *var_pf_t2, *var_pf_t3, *var_pf_t4, *var_pf_t5, *var_pf_t6, *var_pf_t7, *var_pf_t8;
-    double* var_pf_q[NUM_Q_VAR];
-    double* var_pf_t[NUM_T_VAR];
-	double *var_pf_bass, *var_pf_mid, *var_pf_treb, *var_pf_bass_att, *var_pf_mid_att, *var_pf_treb_att;
-	double *var_pf_r, *var_pf_g, *var_pf_b, *var_pf_a;
-	double *var_pf_r2, *var_pf_g2, *var_pf_b2, *var_pf_a2;
-	double *var_pf_border_r, *var_pf_border_g, *var_pf_border_b, *var_pf_border_a;
-    double *var_pf_x, *var_pf_y, *var_pf_rad, *var_pf_ang;
-    double *var_pf_sides, *var_pf_textured, *var_pf_additive, *var_pf_thick, *var_pf_instances, *var_pf_instance;
-    double *var_pf_tex_zoom, *var_pf_tex_ang;
+	float *var_pf_time, *var_pf_fps;
+	float *var_pf_frame;
+	float *var_pf_progress;
+	//float *var_pf_q1, *var_pf_q2, *var_pf_q3, *var_pf_q4, *var_pf_q5, *var_pf_q6, *var_pf_q7, *var_pf_q8;
+	//float *var_pf_t1, *var_pf_t2, *var_pf_t3, *var_pf_t4, *var_pf_t5, *var_pf_t6, *var_pf_t7, *var_pf_t8;
+    float* var_pf_q[NUM_Q_VAR];
+    float* var_pf_t[NUM_T_VAR];
+	float *var_pf_bass, *var_pf_mid, *var_pf_treb, *var_pf_bass_att, *var_pf_mid_att, *var_pf_treb_att;
+	float *var_pf_r, *var_pf_g, *var_pf_b, *var_pf_a;
+	float *var_pf_r2, *var_pf_g2, *var_pf_b2, *var_pf_a2;
+	float *var_pf_border_r, *var_pf_border_g, *var_pf_border_b, *var_pf_border_a;
+    float *var_pf_x, *var_pf_y, *var_pf_rad, *var_pf_ang;
+    float *var_pf_sides, *var_pf_textured, *var_pf_additive, *var_pf_thick, *var_pf_instances, *var_pf_instance;
+    float *var_pf_tex_zoom, *var_pf_tex_ang;
 
 	// for per-point expression evaluation:
     /*
 		NSEEL_VMCTX m_pp_eel;
-	double *var_pp_time, *var_pp_fps;
-	double *var_pp_frame;
-	double *var_pp_progress;
-	double *var_pp_q1, *var_pp_q2, *var_pp_q3, *var_pp_q4, *var_pp_q5, *var_pp_q6, *var_pp_q7, *var_pp_q8;
-	double *var_pp_t1, *var_pp_t2, *var_pp_t3, *var_pp_t4, *var_pp_t5, *var_pp_t6, *var_pp_t7, *var_pp_t8;
-	double *var_pp_bass, *var_pp_mid, *var_pp_treb, *var_pp_bass_att, *var_pp_mid_att, *var_pp_treb_att;
-	double *var_pp_r, *var_pp_g, *var_pp_b, *var_pp_a;
-	double *var_pp_r2, *var_pp_g2, *var_pp_b2, *var_pp_a2;
-	double *var_pp_border_r, *var_pp_border_g, *var_pp_border_b, *var_pp_border_a;
-    double *var_pp_x, *var_pp_y, *var_pp_rad, *var_pp_ang, *var_pp_sides;
+	float *var_pp_time, *var_pp_fps;
+	float *var_pp_frame;
+	float *var_pp_progress;
+	float *var_pp_q1, *var_pp_q2, *var_pp_q3, *var_pp_q4, *var_pp_q5, *var_pp_q6, *var_pp_q7, *var_pp_q8;
+	float *var_pp_t1, *var_pp_t2, *var_pp_t3, *var_pp_t4, *var_pp_t5, *var_pp_t6, *var_pp_t7, *var_pp_t8;
+	float *var_pp_bass, *var_pp_mid, *var_pp_treb, *var_pp_bass_att, *var_pp_mid_att, *var_pp_treb_att;
+	float *var_pp_r, *var_pp_g, *var_pp_b, *var_pp_a;
+	float *var_pp_r2, *var_pp_g2, *var_pp_b2, *var_pp_a2;
+	float *var_pp_border_r, *var_pp_border_g, *var_pp_border_b, *var_pp_border_a;
+    float *var_pp_x, *var_pp_y, *var_pp_rad, *var_pp_ang, *var_pp_sides;
     */
 
-	double t_values_after_init_code[NUM_T_VAR];
+	float t_values_after_init_code[NUM_T_VAR];
 };
 
 class CWave
@@ -186,31 +186,31 @@ public:
 
 	// for per-frame expression evaluation:
 		NSEEL_VMCTX m_pf_eel;
-	double *var_pf_time, *var_pf_fps;
-	double *var_pf_frame;
-	double *var_pf_progress;
-	//double *var_pf_q1, *var_pf_q2, *var_pf_q3, *var_pf_q4, *var_pf_q5, *var_pf_q6, *var_pf_q7, *var_pf_q8;
-	//double *var_pf_t1, *var_pf_t2, *var_pf_t3, *var_pf_t4, *var_pf_t5, *var_pf_t6, *var_pf_t7, *var_pf_t8;
-    double* var_pf_q[NUM_Q_VAR];
-    double* var_pf_t[NUM_T_VAR];
-	double *var_pf_bass, *var_pf_mid, *var_pf_treb, *var_pf_bass_att, *var_pf_mid_att, *var_pf_treb_att;
-	double *var_pf_r, *var_pf_g, *var_pf_b, *var_pf_a;
-    double *var_pf_samples;
+	float *var_pf_time, *var_pf_fps;
+	float *var_pf_frame;
+	float *var_pf_progress;
+	//float *var_pf_q1, *var_pf_q2, *var_pf_q3, *var_pf_q4, *var_pf_q5, *var_pf_q6, *var_pf_q7, *var_pf_q8;
+	//float *var_pf_t1, *var_pf_t2, *var_pf_t3, *var_pf_t4, *var_pf_t5, *var_pf_t6, *var_pf_t7, *var_pf_t8;
+    float* var_pf_q[NUM_Q_VAR];
+    float* var_pf_t[NUM_T_VAR];
+	float *var_pf_bass, *var_pf_mid, *var_pf_treb, *var_pf_bass_att, *var_pf_mid_att, *var_pf_treb_att;
+	float *var_pf_r, *var_pf_g, *var_pf_b, *var_pf_a;
+    float *var_pf_samples;
 
 	// for per-point expression evaluation:
 		NSEEL_VMCTX m_pp_eel;
-	double *var_pp_time, *var_pp_fps;
-	double *var_pp_frame;
-	double *var_pp_progress;
-	//double *var_pp_q1, *var_pp_q2, *var_pp_q3, *var_pp_q4, *var_pp_q5, *var_pp_q6, *var_pp_q7, *var_pp_q8;
-	//double *var_pp_t1, *var_pp_t2, *var_pp_t3, *var_pp_t4, *var_pp_t5, *var_pp_t6, *var_pp_t7, *var_pp_t8;
-    double* var_pp_q[NUM_Q_VAR];
-    double* var_pp_t[NUM_T_VAR];
-	double *var_pp_bass, *var_pp_mid, *var_pp_treb, *var_pp_bass_att, *var_pp_mid_att, *var_pp_treb_att;
-    double *var_pp_sample, *var_pp_value1, *var_pp_value2;
-	double *var_pp_x, *var_pp_y, *var_pp_r, *var_pp_g, *var_pp_b, *var_pp_a;
+	float *var_pp_time, *var_pp_fps;
+	float *var_pp_frame;
+	float *var_pp_progress;
+	//float *var_pp_q1, *var_pp_q2, *var_pp_q3, *var_pp_q4, *var_pp_q5, *var_pp_q6, *var_pp_q7, *var_pp_q8;
+	//float *var_pp_t1, *var_pp_t2, *var_pp_t3, *var_pp_t4, *var_pp_t5, *var_pp_t6, *var_pp_t7, *var_pp_t8;
+    float* var_pp_q[NUM_Q_VAR];
+    float* var_pp_t[NUM_T_VAR];
+	float *var_pp_bass, *var_pp_mid, *var_pp_treb, *var_pp_bass_att, *var_pp_mid_att, *var_pp_treb_att;
+    float *var_pp_sample, *var_pp_value1, *var_pp_value2;
+	float *var_pp_x, *var_pp_y, *var_pp_r, *var_pp_g, *var_pp_b, *var_pp_a;
 
-	double t_values_after_init_code[NUM_T_VAR];
+	float t_values_after_init_code[NUM_T_VAR];
 };
 
 typedef struct
@@ -393,59 +393,59 @@ public:
 
 	// for once-per-frame expression evaluation: [although, these vars are also shared w/preset init expr eval]
 		NSEEL_VMCTX m_pf_eel;
-    double *var_pf_zoom, *var_pf_zoomexp, *var_pf_rot, *var_pf_warp, *var_pf_cx, *var_pf_cy, *var_pf_dx, *var_pf_dy, *var_pf_sx, *var_pf_sy;
-	double *var_pf_time, *var_pf_fps;
-	double *var_pf_bass, *var_pf_mid, *var_pf_treb, *var_pf_bass_att, *var_pf_mid_att, *var_pf_treb_att;
-	double *var_pf_wave_a, *var_pf_wave_r, *var_pf_wave_g, *var_pf_wave_b, *var_pf_wave_x, *var_pf_wave_y, *var_pf_wave_mystery, *var_pf_wave_mode;
-	double *var_pf_decay;
-	double *var_pf_frame;
-	//double *var_pf_q1, *var_pf_q2, *var_pf_q3, *var_pf_q4, *var_pf_q5, *var_pf_q6, *var_pf_q7, *var_pf_q8;
-    double* var_pf_q[NUM_Q_VAR];
-	double *var_pf_progress;
-	double *var_pf_ob_size, *var_pf_ob_r, *var_pf_ob_g, *var_pf_ob_b, *var_pf_ob_a;
-	double *var_pf_ib_size, *var_pf_ib_r, *var_pf_ib_g, *var_pf_ib_b, *var_pf_ib_a;
-	double *var_pf_mv_x;
-	double *var_pf_mv_y;
-	double *var_pf_mv_dx;
-	double *var_pf_mv_dy;
-	double *var_pf_mv_l;
-	double *var_pf_mv_r;
-	double *var_pf_mv_g;
-	double *var_pf_mv_b;
-	double *var_pf_mv_a;
-	double *var_pf_monitor;
-	double *var_pf_echo_zoom, *var_pf_echo_alpha, *var_pf_echo_orient;
+    float *var_pf_zoom, *var_pf_zoomexp, *var_pf_rot, *var_pf_warp, *var_pf_cx, *var_pf_cy, *var_pf_dx, *var_pf_dy, *var_pf_sx, *var_pf_sy;
+	float *var_pf_time, *var_pf_fps;
+	float *var_pf_bass, *var_pf_mid, *var_pf_treb, *var_pf_bass_att, *var_pf_mid_att, *var_pf_treb_att;
+	float *var_pf_wave_a, *var_pf_wave_r, *var_pf_wave_g, *var_pf_wave_b, *var_pf_wave_x, *var_pf_wave_y, *var_pf_wave_mystery, *var_pf_wave_mode;
+	float *var_pf_decay;
+	float *var_pf_frame;
+	//float *var_pf_q1, *var_pf_q2, *var_pf_q3, *var_pf_q4, *var_pf_q5, *var_pf_q6, *var_pf_q7, *var_pf_q8;
+    float* var_pf_q[NUM_Q_VAR];
+	float *var_pf_progress;
+	float *var_pf_ob_size, *var_pf_ob_r, *var_pf_ob_g, *var_pf_ob_b, *var_pf_ob_a;
+	float *var_pf_ib_size, *var_pf_ib_r, *var_pf_ib_g, *var_pf_ib_b, *var_pf_ib_a;
+	float *var_pf_mv_x;
+	float *var_pf_mv_y;
+	float *var_pf_mv_dx;
+	float *var_pf_mv_dy;
+	float *var_pf_mv_l;
+	float *var_pf_mv_r;
+	float *var_pf_mv_g;
+	float *var_pf_mv_b;
+	float *var_pf_mv_a;
+	float *var_pf_monitor;
+	float *var_pf_echo_zoom, *var_pf_echo_alpha, *var_pf_echo_orient;
     // new in v1.04:
-	double *var_pf_wave_usedots, *var_pf_wave_thick, *var_pf_wave_additive, *var_pf_wave_brighten;
-    double *var_pf_darken_center, *var_pf_gamma, *var_pf_wrap;
-    double *var_pf_invert, *var_pf_brighten, *var_pf_darken, *var_pf_solarize;
-    double *var_pf_meshx, *var_pf_meshy;
-    double *var_pf_pixelsx, *var_pf_pixelsy;
-    double *var_pf_aspectx, *var_pf_aspecty;
-    double *var_pf_blur1min;
-    double *var_pf_blur2min;
-    double *var_pf_blur3min;
-    double *var_pf_blur1max;
-    double *var_pf_blur2max;
-    double *var_pf_blur3max;
-    double *var_pf_blur1_edge_darken;
+	float *var_pf_wave_usedots, *var_pf_wave_thick, *var_pf_wave_additive, *var_pf_wave_brighten;
+    float *var_pf_darken_center, *var_pf_gamma, *var_pf_wrap;
+    float *var_pf_invert, *var_pf_brighten, *var_pf_darken, *var_pf_solarize;
+    float *var_pf_meshx, *var_pf_meshy;
+    float *var_pf_pixelsx, *var_pf_pixelsy;
+    float *var_pf_aspectx, *var_pf_aspecty;
+    float *var_pf_blur1min;
+    float *var_pf_blur2min;
+    float *var_pf_blur3min;
+    float *var_pf_blur1max;
+    float *var_pf_blur2max;
+    float *var_pf_blur3max;
+    float *var_pf_blur1_edge_darken;
 
 	// for per-vertex expression evaluation:
 		NSEEL_VMCTX m_pv_eel;
-    double *var_pv_zoom, *var_pv_zoomexp, *var_pv_rot, *var_pv_warp, *var_pv_cx, *var_pv_cy, *var_pv_dx, *var_pv_dy, *var_pv_sx, *var_pv_sy;
-	double *var_pv_time, *var_pv_fps;
-	double *var_pv_bass, *var_pv_mid, *var_pv_treb, *var_pv_bass_att, *var_pv_mid_att, *var_pv_treb_att;
-	double *var_pv_x, *var_pv_y, *var_pv_rad, *var_pv_ang;
-	double *var_pv_frame;
-	//double *var_pv_q1, *var_pv_q2, *var_pv_q3, *var_pv_q4, *var_pv_q5, *var_pv_q6, *var_pv_q7, *var_pv_q8;
-    double* var_pv_q[NUM_Q_VAR];
-	double *var_pv_progress;
-    double *var_pv_meshx, *var_pv_meshy;
-    double *var_pv_pixelsx, *var_pv_pixelsy;
-    double *var_pv_aspectx, *var_pv_aspecty;
+    float *var_pv_zoom, *var_pv_zoomexp, *var_pv_rot, *var_pv_warp, *var_pv_cx, *var_pv_cy, *var_pv_dx, *var_pv_dy, *var_pv_sx, *var_pv_sy;
+	float *var_pv_time, *var_pv_fps;
+	float *var_pv_bass, *var_pv_mid, *var_pv_treb, *var_pv_bass_att, *var_pv_mid_att, *var_pv_treb_att;
+	float *var_pv_x, *var_pv_y, *var_pv_rad, *var_pv_ang;
+	float *var_pv_frame;
+	//float *var_pv_q1, *var_pv_q2, *var_pv_q3, *var_pv_q4, *var_pv_q5, *var_pv_q6, *var_pv_q7, *var_pv_q8;
+    float* var_pv_q[NUM_Q_VAR];
+	float *var_pv_progress;
+    float *var_pv_meshx, *var_pv_meshy;
+    float *var_pv_pixelsx, *var_pv_pixelsy;
+    float *var_pv_aspectx, *var_pv_aspecty;
 
-	double q_values_after_init_code[NUM_Q_VAR];
-    double monitor_after_init_code;
+	float q_values_after_init_code[NUM_Q_VAR];
+    float monitor_after_init_code;
 
     float GetPresetStartTime() { return m_fPresetStartTime; }
     float m_fPresetStartTime;

@@ -195,7 +195,7 @@ int CPluginShell::AllocateDX9Stuff()
 	int ret = AllocateMyDX9Stuff();
 	m_playlist_top_idx = -1;
 	m_text.Finish();
-	m_text.Init(GetDevice(), (IDirect3DTexture9**)&m_lpDDSText, 1);
+	m_text.Init(GetDevice(), (IDirect3DTexture9*)m_lpDDSText, 1);
 	return ret;
 }
 

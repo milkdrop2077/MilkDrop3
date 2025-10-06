@@ -2,7 +2,7 @@
   Expression Evaluator Library (NS-EEL) v2
   Copyright (C) 2004-2008 Cockos Incorporated
   Copyright (C) 1999-2003 Nullsoft, Inc.
-  
+
   nseel-lextab.c
 
   This software is provided 'as-is', without any express or implied
@@ -22,7 +22,12 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "ns-eel-int.h"
+#include "y.tab.h"
 
 
 #define LEXSKIP		(-1)
@@ -50,40 +55,40 @@ static int _lmovb(struct lextab *lp, int c, int st)
 #define VARIABLE 4
 #define OTHER    5
 
-static int _Alextab(compileContext *ctx, int __na__)		 
+static int _Alextab(compileContext *ctx, int __na__)
 {
 	// fucko: JF> 17 -> 19?
-  
-   if (__na__ >= 0 && __na__ <= 17) 
+
+   if (__na__ >= 0 && __na__ <= 17)
 	   nseel_count(ctx);
    switch (__na__)
    {
-      case 0:           
+      case 0:
         *ctx->yytext = 0;
         nseel_gettoken(ctx,ctx->yytext, sizeof(ctx->yytext));
         if (ctx->yytext[0] < '0' || ctx->yytext[0] > '9') // not really a hex value, lame
         {
-          nseel_setLastVar(ctx); ctx->yylval = nseel_lookup(ctx,&__na__); return __na__;
+          nseel_setLastVar(ctx); yylval.value = nseel_lookup(ctx,&__na__); return __na__;
         }
-        ctx->yylval = nseel_translate(ctx,HEXCONST); 
+        yylval.value = (int)nseel_translate(ctx,(char*)HEXCONST, 0);
       return VALUE;
-      case 1:   ctx->yylval = nseel_translate(ctx,INTCONST); return VALUE; 
-      case 2:   ctx->yylval = nseel_translate(ctx,INTCONST); return VALUE; 
-      case 3:   ctx->yylval = nseel_translate(ctx,DBLCONST); return VALUE; 
+      case 1:   yylval.value = (int)nseel_translate(ctx,(char*)INTCONST, 0); return VALUE;
+      case 2:   yylval.value = (int)nseel_translate(ctx,(char*)INTCONST, 0); return VALUE;
+      case 3:   yylval.value = (int)nseel_translate(ctx,(char*)DBLCONST, 0); return VALUE;
       case 4:
-      case 5:   nseel_setLastVar(ctx); ctx->yylval = nseel_lookup(ctx,&__na__); return __na__;
+      case 5:   nseel_setLastVar(ctx); yylval.value = nseel_lookup(ctx,&__na__); return __na__;
       case 6:   return '+';
       case 7:   return '-';
-      case 8:   return '*'; 
-      case 9:   return '/'; 
-      case 10:  return '%'; 
-      case 11:  return '&'; 
-      case 12:  return '|'; 
-      case 13:  return '('; 
-      case 14:  return ')'; 
-      case 15:  return '='; 
-      case 16:  return ','; 
-      case 17:  return ';'; 
+      case 8:   return '*';
+      case 9:   return '/';
+      case 10:  return '%';
+      case 11:  return '&';
+      case 12:  return '|';
+      case 13:  return '(';
+      case 14:  return ')';
+      case 15:  return '=';
+      case 16:  return ',';
+      case 17:  return ';';
 	}
 	return (LEXSKIP);
 }
@@ -258,20 +263,18 @@ static int _Blextab[] =
    };
 
 struct lextab nseel_lextab =	{
-			36,		 
-			_Dlextab,	 
-			_Nlextab,	 
-			_Clextab,	 
-			_Blextab,	 
-			524,		 
-			_lmovb,		 
-			_Flextab,	 
-			_Alextab,	 
+			36,
+			_Dlextab,
+			_Nlextab,
+			_Clextab,
+			_Blextab,
+			524,
+			_lmovb,
+			_Flextab,
+			_Alextab,
 
-			0,   	 
-			0,		 
-			0,		 
-			0,		 
+			0,
+			0,
+			0,
+			0,
 			};
-
- 

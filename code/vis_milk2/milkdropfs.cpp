@@ -275,8 +275,8 @@ void CPlugin::RunPerFrameEquations(int code)
         for (int vi=0; vi<NUM_Q_VAR; vi++)
             *pState->var_pv_q[vi] = *pState->var_pf_q[vi];
 
-        *pState->var_pf_gamma     = std::max(0.0, std::min(8.0, *pState->var_pf_gamma));
-        *pState->var_pf_echo_zoom = std::max(0.001, std::min(1000.0, *pState->var_pf_echo_zoom));
+        *pState->var_pf_gamma     = std::max(0.0f, std::min(8.0f, *pState->var_pf_gamma));
+        *pState->var_pf_echo_zoom = std::max(0.001f, std::min(1000.0f, *pState->var_pf_echo_zoom));
 	}
 
 	if (m_pState->m_bBlending)

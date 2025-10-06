@@ -263,7 +263,7 @@ void CState::RegisterBuiltInVariables(int flags)
 {
     if (flags & RECOMPILE_PRESET_CODE)
     {
-	    NSEEL_VM_resetvars(m_pf_eel);
+	    NSEEL_VM_freevars(m_pf_eel);
         var_pf_zoom		= NSEEL_VM_regvar(m_pf_eel, "zoom");		// i/o
 	    var_pf_zoomexp  = NSEEL_VM_regvar(m_pf_eel, "zoomexp");	// i/o
 	    var_pf_rot		= NSEEL_VM_regvar(m_pf_eel, "rot");		// i/o
@@ -350,7 +350,7 @@ void CState::RegisterBuiltInVariables(int flags)
 	    // this is the list of variables that can be used for a PER-VERTEX calculation:
 	    // ('vertex' meaning a vertex on the mesh) (as opposed to a once-per-frame calculation)
 
-        NSEEL_VM_resetvars(m_pv_eel);
+        NSEEL_VM_freevars(m_pv_eel);
 
         var_pv_zoom		= NSEEL_VM_regvar(m_pv_eel, "zoom");		// i/o
 	    var_pv_zoomexp  = NSEEL_VM_regvar(m_pv_eel, "zoomexp");	// i/o
@@ -394,7 +394,7 @@ void CState::RegisterBuiltInVariables(int flags)
     {
         for (int i=0; i<MAX_CUSTOM_WAVES; i++)
         {
-	        NSEEL_VM_resetvars(m_wave[i].m_pf_eel);
+	        NSEEL_VM_freevars(m_wave[i].m_pf_eel);
 	        m_wave[i].var_pf_time		= NSEEL_VM_regvar(m_wave[i].m_pf_eel, "time");		// i
 	        m_wave[i].var_pf_fps 		= NSEEL_VM_regvar(m_wave[i].m_pf_eel, "fps");		// i
 	        m_wave[i].var_pf_frame      = NSEEL_VM_regvar(m_wave[i].m_pf_eel, "frame");     // i
@@ -423,7 +423,7 @@ void CState::RegisterBuiltInVariables(int flags)
 	        m_wave[i].var_pf_a          = NSEEL_VM_regvar(m_wave[i].m_pf_eel, "a");         // i/o
             m_wave[i].var_pf_samples    = NSEEL_VM_regvar(m_wave[i].m_pf_eel, "samples");   // i/o
 
-	        NSEEL_VM_resetvars(m_wave[i].m_pp_eel);
+	        NSEEL_VM_freevars(m_wave[i].m_pp_eel);
 	        m_wave[i].var_pp_time		= NSEEL_VM_regvar(m_wave[i].m_pp_eel, "time");		// i
 	        m_wave[i].var_pp_fps 		= NSEEL_VM_regvar(m_wave[i].m_pp_eel, "fps");		// i
 	        m_wave[i].var_pp_frame      = NSEEL_VM_regvar(m_wave[i].m_pp_eel, "frame");     // i
@@ -462,7 +462,7 @@ void CState::RegisterBuiltInVariables(int flags)
     {
         for (int i=0; i<MAX_CUSTOM_SHAPES; i++)
         {
-	        NSEEL_VM_resetvars(m_shape[i].m_pf_eel);
+	        NSEEL_VM_freevars(m_shape[i].m_pf_eel);
 	        m_shape[i].var_pf_time		= NSEEL_VM_regvar(m_shape[i].m_pf_eel, "time");		// i
 	        m_shape[i].var_pf_fps 		= NSEEL_VM_regvar(m_shape[i].m_pf_eel, "fps");		// i
 	        m_shape[i].var_pf_frame      = NSEEL_VM_regvar(m_shape[i].m_pf_eel, "frame");     // i
@@ -877,6 +877,7 @@ void WriteCode(FILE* fOut, int i, char* pStr, char* prefix, bool bPrependApostro
 
 bool CState::Export(const char *szIniFile)
 {
+    int i;
 	FILE *fOut = fopen(szIniFile, "w");
 	if (!fOut) return false;
 
@@ -967,20 +968,20 @@ bool CState::Export(const char *szIniFile)
 	fprintf(fOut, "%s=%.3f\n", "b3x",                 m_fBlur3Max.eval(-1));
 	fprintf(fOut, "%s=%.3f\n", "b1ed",                m_fBlur1EdgeDarken.eval(-1));
 
-    for (int i=0; i<MAX_CUSTOM_WAVES; i++)
+    for (i=0; i<MAX_CUSTOM_WAVES; i++)
         m_wave[i].Export(fOut, "dummy_filename", i);
 
-    for (int i=0; i<MAX_CUSTOM_SHAPES; i++)
+    for (i=0; i<MAX_CUSTOM_SHAPES; i++)
         m_shape[i].Export(fOut, "dummy_filename", i);
 
 	// write out arbitrary expressions, one line at a time
-    WriteCode(fOut, i, m_szPerFrameInit, "per_frame_init_");
-    WriteCode(fOut, i, m_szPerFrameExpr, "per_frame_");
-    WriteCode(fOut, i, m_szPerPixelExpr, "per_pixel_");
+    WriteCode(fOut, 0, m_szPerFrameInit, "per_frame_init_");
+    WriteCode(fOut, 0, m_szPerFrameExpr, "per_frame_");
+    WriteCode(fOut, 0, m_szPerPixelExpr, "per_pixel_");
     if (m_nWarpPSVersion >= MD2_PS_2_0)
-        WriteCode(fOut, i, m_szWarpShadersText, "warp_", true);
+        WriteCode(fOut, 0, m_szWarpShadersText, "warp_", true);
     if (m_nCompPSVersion >= MD2_PS_2_0)
-        WriteCode(fOut, i, m_szCompShadersText, "comp_", true);
+        WriteCode(fOut, 0, m_szCompShadersText, "comp_", true);
 
 	fclose(fOut);
 
@@ -1353,16 +1354,20 @@ bool CState::Import(const char *szIniFile, float fTime, CState* pOldState, DWORD
         //m_szPerFrameInit[0] = 0;
         //m_szPerFrameExpr[0] = 0;
         //m_szPerPixelExpr[0] = 0;
-        ReadCode(f, m_szPerFrameInit, "per_frame_init_");
-        ReadCode(f, m_szPerFrameExpr, "per_frame_");
-        ReadCode(f, m_szPerPixelExpr, "per_pixel_");
+        char buf1[] = "per_frame_init_";
+        char buf2[] = "per_frame_";
+        char buf3[] = "per_pixel_";
+        ReadCode(f, m_szPerFrameInit, buf1);
+        ReadCode(f, m_szPerFrameExpr, buf2);
+        ReadCode(f, m_szPerPixelExpr, buf3);
     }
 
     // warp shader
     if (ApplyFlags & STATE_WARP)
     {
         //m_szWarpShadersText[0] = 0;
-        ReadCode(f, m_szWarpShadersText, "warp_");
+        char buf[] = "warp_";
+        ReadCode(f, m_szWarpShadersText, buf);
         if (!m_szWarpShadersText[0])
             g_plugin.GenWarpPShaderText(m_szWarpShadersText, m_fDecay.eval(-1), m_bTexWrap);
         m_nWarpPSVersion = nWarpPSVersionInFile;
@@ -1372,7 +1377,8 @@ bool CState::Import(const char *szIniFile, float fTime, CState* pOldState, DWORD
     if (ApplyFlags & STATE_COMP)
     {
         //m_szCompShadersText[0] = 0;
-        ReadCode(f, m_szCompShadersText, "comp_");
+        char buf[] = "comp_";
+        ReadCode(f, m_szCompShadersText, buf);
         if (!m_szCompShadersText[0])
             g_plugin.GenCompPShaderText(m_szCompShadersText, m_fGammaAdj.eval(-1), m_fVideoEchoAlpha.eval(-1), m_fVideoEchoZoom.eval(-1), m_nVideoEchoOrientation, m_fShader.eval(-1), m_bBrighten, m_bDarken, m_bSolarize, m_bInvert);
         m_nCompPSVersion = nCompPSVersionInFile;
@@ -1600,7 +1606,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 	        {
 		        NSEEL_CODEHANDLE	pf_codehandle_init;
 
-			    if ( ! (pf_codehandle_init = NSEEL_code_compile(m_pf_eel, buf)))
+			    if ( ! (pf_codehandle_init = NSEEL_code_compile(m_pf_eel, buf, 0)))
 			    {
                     char buf[1024];
 				    sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_PRESET_INIT_CODE), m_szDesc);
@@ -1631,7 +1637,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
             StripLinefeedCharsAndComments(m_szPerFrameExpr, buf);
 	        if (buf[0])
 	        {
-			    if ( ! (m_pf_codehandle = NSEEL_code_compile(m_pf_eel, buf)))
+			    if ( ! (m_pf_codehandle = NSEEL_code_compile(m_pf_eel, buf, 0)))
 			    {
                     char buf[1024];
 				    sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_PER_FRAME_CODE), m_szDesc);
@@ -1643,7 +1649,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 		    StripLinefeedCharsAndComments(m_szPerPixelExpr, buf);
 	        if (buf[0])
 	        {
-			    if ( ! (m_pp_codehandle = NSEEL_code_compile(m_pv_eel, buf)))
+			    if ( ! (m_pp_codehandle = NSEEL_code_compile(m_pv_eel, buf, 0)))
 			    {
                     char buf[1024];
 				    sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_PER_VERTEX_CODE), m_szDesc);
@@ -1665,7 +1671,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 		            #ifndef _NO_EXPR_
 		            {
 		                NSEEL_CODEHANDLE	codehandle_temp;
-			            if ( ! (codehandle_temp = NSEEL_code_compile(m_wave[i].m_pf_eel, buf)))
+			            if ( ! (codehandle_temp = NSEEL_code_compile(m_wave[i].m_pf_eel, buf, 0)))
 			            {
                             char buf[1024];
 				            sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_WAVE_X_INIT_CODE), m_szDesc, i);
@@ -1702,7 +1708,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 	            if (buf[0])
                 {
 		            #ifndef _NO_EXPR_
-			            if ( ! (m_wave[i].m_pf_codehandle = NSEEL_code_compile(m_wave[i].m_pf_eel, buf)))
+			            if ( ! (m_wave[i].m_pf_codehandle = NSEEL_code_compile(m_wave[i].m_pf_eel, buf, 0)))
 			            {
                             char buf[1024];
 				            sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_WAVE_X_PER_FRAME_CODE), m_szDesc, i);
@@ -1715,7 +1721,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 		        StripLinefeedCharsAndComments(m_wave[i].m_szPerPoint, buf);
 	            if (buf[0])
                 {
-			        if ( ! (m_wave[i].m_pp_codehandle = NSEEL_code_compile(m_wave[i].m_pp_eel, buf)))
+			        if ( ! (m_wave[i].m_pp_codehandle = NSEEL_code_compile(m_wave[i].m_pp_eel, buf, 0)))
 			        {
                         char buf[1024];
 				        sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_WAVE_X_PER_POINT_CODE), m_szDesc, i);
@@ -1736,7 +1742,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 		            #ifndef _NO_EXPR_
 		            {
 		                NSEEL_CODEHANDLE	codehandle_temp;
-			            if ( ! (codehandle_temp = NSEEL_code_compile(m_shape[i].m_pf_eel, buf)))
+			            if ( ! (codehandle_temp = NSEEL_code_compile(m_shape[i].m_pf_eel, buf, 0)))
 			            {
                             char buf[1024];
 				            sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_SHAPE_X_INIT_CODE), m_szDesc, i);
@@ -1773,7 +1779,7 @@ void CState::RecompileExpressions(int flags, int bReInit)
 	            if (buf[0])
                 {
 		            #ifndef _NO_EXPR_
-			            if ( ! (m_shape[i].m_pf_codehandle = NSEEL_code_compile(m_shape[i].m_pf_eel, buf)))
+			            if ( ! (m_shape[i].m_pf_codehandle = NSEEL_code_compile(m_shape[i].m_pf_eel, buf, 0)))
 			            {
                             char buf[1024];
 				            sprintf(buf, wasabiApiLangString(IDS_WARNING_PRESET_X_ERROR_IN_SHAPE_X_PER_FRAME_CODE), m_szDesc, i);

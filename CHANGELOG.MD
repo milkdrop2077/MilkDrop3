@@ -5,9 +5,11 @@ This file documents the major changes made to the MilkDrop3 codebase in the effo
 ## Build System and Stubbing (In-Progress)
 
 - **Consolidated Windows/DirectX Types:** All Windows-specific type definitions (e.g., `DWORD`, `RECT`, `HWND`) have been moved to a central header, `shell_defines.h`, to resolve redefinition conflicts across the codebase.
-- **Stubbed DirectX Dependencies:** A significant number of DirectX types, constants, and functions have been stubbed out in `shell_defines.h` and various `.cpp` files. This was a necessary step to satisfy the compiler and achieve a successful build, but the stubs will need to be replaced with functional OpenGL/GLFW code.
-- **Resolved String Mismatches:** Corrected numerous compilation errors by migrating from narrow strings (`char*`) to wide strings (`wchar_t*`) where appropriate, including updating function calls from `strcpy` to `wcscpy`.
+- **Stubbed DirectX Dependencies:** A significant number of DirectX types, constants, and functions have been stubbed out in `shell_defines.h` and a new `dx_on_gl.h` compatibility header. This was a necessary step to satisfy the compiler and achieve a successful build, but the stubs will need to be replaced with functional OpenGL/GLFW code.
+- **Resolved String Mismatches:** Corrected numerous compilation errors by migrating from wide-character strings (`wchar_t*`) to standard strings (`char*`) where appropriate, including updating function calls from `wcscpy` to `strcpy` and `swprintf` to `sprintf`.
 - **Fixed Platform-Specific Function Calls:** Replaced non-standard functions like `min`/`max` with `std::min`/`std::max` and addressed other Windows-specific API calls.
+- **`ns-eel2` Library Updates:** The `ns-eel2` library has been updated to include missing source files and the `CMakeLists.txt` has been updated to exclude the conflicting `loose_eel.c` file.
+- **Corrected `NSEEL` Function Calls:** Replaced calls to the non-existent `NSEEL_VM_resetvars` function with `NSEEL_VM_freevars` and added the missing `lineoffs` argument to all calls to `NSEEL_code_compile`.
 
 ## Core Changes
 
