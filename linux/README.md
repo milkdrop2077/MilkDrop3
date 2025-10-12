@@ -273,9 +273,10 @@ wget -O "MilkDrop 3.exe" "https://raw.githubusercontent.com/milkdrop2077/MilkDro
 
 # 5. Download and run the launcher script
 cd ~
-wget -O milkdrop3-launcher.sh "https://raw.githubusercontent.com/milkdrop2077/MilkDrop3/main/milkdrop3-launcher.sh"
+wget -O milkdrop3-launcher.sh "https://raw.githubusercontent.com/milkdrop2077/MilkDrop3/main/linux/milkdrop3-launcher.sh"
 chmod +x milkdrop3-launcher.sh
 ./milkdrop3-launcher.sh
 ```
 
 **Enjoy the visualizations!** 🎵🎨
+
