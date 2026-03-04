@@ -64,7 +64,8 @@ hardcut2 : load a new preset if treb > 2.9 with a minimum delay of 0.5 sec<br/>
 hardcut3 : load a new preset if treb > 2.9 with a minimum delay of 1 sec<br/>
 hardcut4 : load a new preset if treb > 2.9 with a minimum delay of 3 sec but if treb > 8 then it will load a new preset<br/>
 hardcut5 : load a new preset if treb > 2.9 with a minimum delay of 5 sec<br/>
-hardcut6 : load a new preset if bass >1.5 + will load Bass/WHITE.milk if bass > 4.90<br/>
+hardcut6 : load a new preset if bass > 1.5 + will load Bass/WHITE.milk if bass > 4.90<br/>
+hardcut7 : inject an effect if treb > 2.9 with a minimum delay of 1.5 sec (does not load a new preset!)<br/>
 
 - Lots of new transition effects (when pressing the spacebar), the first old 4 were : "zoom", "side", "plasma", "cercle".<br/>
 New ones: "plasma2", "plasma3", "snail", "snail2", "snail3", "triangle", "donuts", "corner", "patches", "checkerboard", "bubbles", "stars", "cisor", "wave",  "curtain", "vertical", "horizontal", "linesvertical", "lineshorizontal".<br/>
