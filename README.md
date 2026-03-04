@@ -115,6 +115,35 @@ https://www.buymeacoffee.com/MilkDrop2077/<br/>
 
 # History:
 
+★ <ins>03/03/2026 : Version 3.33</ins><br/>
+- During Setup: choose whether your computer can handle demanding shaders.<br/>
+  If unchecked, the heaviest presets won’t be installed, but everything else will run more smoothly on older machines.<br/>
+- Lots of new, mind-blowing presets from some of the most amazing shader artists!<br/>
+- Support for choosing the audio device (including microphones!)<br/>
+- Full FFT audio data now directly accessible in shaders for the first time in MilkDrop!<br/>
+  Use get_fft(pos) and get_fft_hz(freq) - see the included examples!<br/>
+- Drag & drop support for folders: Easily load presets by dragging a folder into the app!<br/> 
+- Drag & drop support for playlists.<br/>
+- Blending support for .milk2 files:<br/>
+  Smooth transitions are now supported for double-presets. This has been requested many times; it was a coding nightmare but I'm glad it's finally working!<br/> 
+  This feature can be disabled in MilkPanel → Options → Transitions.<br/>
+- Improved transitions (corner, patches, stars2, arrow)<br/>
+  These transitions have been recoded to eliminate snapping at the end and provide smoother blending. All transitions now fully blend properly (except cross2)!<br/> 
+  If you previously created double-presets using these transitions, they may look slightly different.<br/>
+  In practice, the difference should be minimal but let me know if you notice anything. If needed, I can add a retro-compatibility option.<br/>
+- Mouse support: check out presets tagged with [MOUSE] in their names.<br/>
+      mouse.x = X position<br/>
+      mouse.y = Y position<br/>
+      mouse.z = left button down (held)<br/>
+      mouse.w = left button released (clicked)<br/>
+      mouse.xy = current mouse position<br/>
+- New “Add to Favorites” menu option: instantly copy the current preset to MilkDrop3\favorites.<br/>
+- New MilkPanel: mash up presets more easily, use search-and-replace, and inject Q variables directly into the code.<br/>
+- New audio sensitivity setting: amplify the picked-up volume.<br/>
+- New FFT Attack & Decay: tweak how shaders respond to get_fft(pos).<br/>
+- Tons of small bug fixes and improvements!<br/>
+- A few shaders are not open-source and will only work with MilkDrop3.<br/><br/>
+
 ★ <ins>20/09/2025 : Version 3.31</ins><br/>
 - Full support for Hi-Res audio devices (24-bit/192kHz and beyond).<br/>
 - Resolved compatibility issues with ATI / AMD PS4 shaders.<br/>
