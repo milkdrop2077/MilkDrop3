@@ -192,6 +192,36 @@ WINEDEBUG=+d3d wine "MilkDrop 3.exe"
   ```bash
   WINEARCH=win32 WINEPREFIX=~/.wine32 winetricks d3dx9 vcrun2019
   ```
+  **Note**: this doesn't work on modern "wow64" unified Wine builds (Wine
+  9.0+, which ship a single 64-bit binary handling both architectures) —
+  you'll get `wine: WINEARCH is set to 'win32' but this is not supported
+  in wow64 mode.` It only applies to older Wine installs with separate
+  win32/win64 prefixes.
+
+#### Page fault crash at startup (silent audio buffer)
+
+If MilkDrop3 crashes right at launch (or a few seconds in) with an
+`Unhandled exception: page fault on write access ... in wow64 32-bit
+code` at address `0x00492D39`, this isn't a Wine or graphics-driver
+issue — it reproduced identically under both the default wined3d/OpenGL
+backend and DXVK (Vulkan), which rules out the D3D backend as the cause.
+
+The trigger appears to be the app's WASAPI audio-capture path receiving
+a silent or near-empty buffer right at startup — e.g. nothing actively
+playing through the default output device, or only a quiet/passive
+monitor stream connected (a capture-card monitor with no source feeding
+it was enough to reproduce it reliably).
+
+**Workaround**: make sure real, audible audio is already playing through
+your system's default output device *before* launching `MilkDrop 3.exe`
+(a song in a media player, a browser tab, etc.). Once it gets a few
+seconds of live, non-silent audio to capture, it runs stably.
+
+Independently of this crash, installing DXVK is also worth doing for
+better D3D9 compatibility on Linux:
+```bash
+winetricks -q dxvk
+```
 
 ### No Visualizations Appearing
 - Ensure audio is playing
