@@ -106,12 +106,12 @@ void SetAudioBuf(const BYTE *pData, const UINT32 nNumFramesToRead, const WAVEFOR
         len = SAMPLE_SIZE_LPB;
     }
     else {
-        n = SAMPLE_SIZE_LPB - nNumFramesToRead;
+        n = 0;
         start = 0;
         len = nNumFramesToRead;
     }
 
-    for (int i = start; i < len; i++, n++) {
+    for (int i = start; i < start + len; i++, n++) {
         BlockOffset = i * pwfx->nBlockAlign;
 
         // Left channel (number 0)
